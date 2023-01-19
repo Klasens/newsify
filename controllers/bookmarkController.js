@@ -1,12 +1,15 @@
 const fs = require('fs');
 
+//*Psuedo Database
 const bookmarks = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/bookmarks.json`)
 );
 
+//* Bookmark Handler Functions
 exports.checkID = (req, res, next, val) => {
-  console.log(`Bookmark ID is: ${val}`);
-  const id = req.params.id;
+  // eslint-disable-next-line no-console
+  console.log(`Requested ID is: ${val}`);
+  const { id } = req.params;
   // Query for bookmark ID
   const bookmark = bookmarks.find((el) => el.id === id);
   // Check if ID is valid
@@ -19,6 +22,7 @@ exports.checkID = (req, res, next, val) => {
 };
 
 exports.checkBody = (req, res, next) => {
+  // eslint-disable-next-line no-console
   console.log(`========== Checking the URL and Title ==========`);
   if (!req.body.title || !req.body.url)
     return res.status(400).json({
@@ -29,7 +33,7 @@ exports.checkBody = (req, res, next) => {
 };
 
 exports.getBookmark = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   // Query for bookmark ID
   const bookmark = bookmarks.find((el) => el.id === id);
   // Return bookmark
@@ -43,13 +47,13 @@ exports.getBookmark = (req, res) => {
 
 exports.addBookmark = (req, res) => {
   let newId = '';
-  for (i = 0; i < 10; ++i) newId += Math.floor(Math.random() * 10);
-  const newBookmark = Object.assign({ id: newId }, req.body);
+  for (let i = 0; i < 10; i += 1) newId += Math.floor(Math.random() * 10);
+  const newBookmark = Object.spread({ id: newId }, req.body);
   bookmarks.push(newBookmark);
   fs.writeFile(
     `${__dirname}/../dev-data/data/bookmarks.json`,
     JSON.stringify(bookmarks),
-    (err) => {
+    () => {
       res.status(201).json({
         status: 'success',
         data: {
@@ -58,6 +62,7 @@ exports.addBookmark = (req, res) => {
       });
     }
   );
+  // eslint-disable-next-line no-console
   console.log(
     `---------- Successfully added bookmark with ID ${newBookmark.id} ----------`
   );

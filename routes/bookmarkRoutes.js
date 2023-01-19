@@ -1,10 +1,16 @@
+//* External Modules
 const express = require('express');
-const bookmarkController = require('./../controllers/bookmarkController');
 
+//* Internal Modules
+const bookmarkController = require('../controllers/bookmarkController');
+
+//* Initialize Router
 const router = express.Router();
 
+//* Implement Middleware
 router.param('id', bookmarkController.checkID);
 
+//* Handle Bookmark Routes
 router
   .route('/')
   .post(bookmarkController.checkBody, bookmarkController.addBookmark);
@@ -14,4 +20,5 @@ router
   .patch(bookmarkController.updateBookmark)
   .delete(bookmarkController.deleteBookmark);
 
+//* Export Router
 module.exports = router;
