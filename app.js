@@ -5,7 +5,17 @@ const app = express();
 
 app.use(express.json());
 
-// Fetch URL
+app.use((req, res, next) => {
+  console.log('========== Middleware Response ==========');
+  next();
+});
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
+// GNews Fetch URL
 // https://gnews.io/api/v4/search?q=santos&token=1f0b1616e135b0f18fb4cb8923c548e8&lang=en&country=us&max=10
 
 const articles = JSON.parse(
@@ -19,6 +29,7 @@ const bookmarks = JSON.parse(
 const getArticles = (req, res) => {
   res.status(200).json({
     status: 'success',
+    requestedAt: req.requestTime,
     results: articles.articles.length,
     data: {
       articles,
