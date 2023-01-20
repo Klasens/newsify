@@ -50,18 +50,37 @@ exports.addBookmark = async (req, res) => {
   }
 };
 
-exports.updateBookmark = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {
-      bookmark: '<updated bookmark here>',
-    },
-  });
+exports.updateBookmark = async (req, res) => {
+  try {
+    const bookmark = await Bookmark.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        bookmark,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: 'Invalid ID',
+    });
+  }
 };
 
-exports.deleteBookmark = (req, res) => {
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
+exports.deleteBookmark = async (req, res) => {
+  try {
+    await Bookmark.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: 'Invalid ID',
+    });
+  }
 };
