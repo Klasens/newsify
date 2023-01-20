@@ -8,7 +8,10 @@ const articleController = require('../controllers/articleController');
 const router = express.Router();
 
 //* Handle Article Routes
-router.route('/').get(articleController.getArticles);
+router
+  .route('/')
+  .get(articleController.getArticles)
+  .post(articleController.addArticle);
 
 //* Export Router
 module.exports = router;

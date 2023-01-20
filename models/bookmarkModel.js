@@ -6,6 +6,12 @@ const bookmarkSchema = new mongoose.Schema({
   userTitle: {
     type: String,
     default: '',
+    trim: true,
+  },
+  userSummary: {
+    type: String,
+    default: '',
+    trim: true,
   },
   title: {
     type: String,
@@ -19,8 +25,12 @@ const bookmarkSchema = new mongoose.Schema({
     required: [true, 'Aritlces need to have a URL'],
   },
   image: String,
-  publishedAt: String,
+  publishedAt: Date,
   source: Object,
+  bookmarkCreatedAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 const Bookmark = mongoose.model('Bookmark', bookmarkSchema);
