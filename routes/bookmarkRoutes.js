@@ -8,12 +8,13 @@ const bookmarkController = require('../controllers/bookmarkController');
 const router = express.Router();
 
 //* Implement Middleware
-router.param('id', bookmarkController.checkID);
+// router.param('id', bookmarkController.checkID);
 
 //* Handle Bookmark Routes
 router
   .route('/')
-  .post(bookmarkController.checkBody, bookmarkController.addBookmark);
+  .get(bookmarkController.getAllBookmarks)
+  .post(bookmarkController.addBookmark);
 router
   .route('/:id')
   .get(bookmarkController.getBookmark)
