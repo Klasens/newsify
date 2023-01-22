@@ -3,9 +3,12 @@ const express = require('express');
 
 //* Internal Modules
 const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
 
 //* Initialize Router
 const router = express.Router();
+
+router.post('/signup', authController.signup);
 
 //* Handle User Routes
 router

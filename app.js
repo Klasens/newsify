@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const bookmarkRouter = require('./routes/bookmarkRoutes');
 const userRouter = require('./routes/userRoutes');
 const articleRouter = require('./routes/articleRoutes');
+const articleRouterAPI = require('./routes/articleRoutesAPI');
 
 //* Initializing express
 const app = express();
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/bookmarks', bookmarkRouter);
 app.use('/api/v1/articles', articleRouter);
+app.use('/api/v1/articlesAPI', articleRouterAPI);
 app.use('/api/v1/users', userRouter);
 
 //* Export App
