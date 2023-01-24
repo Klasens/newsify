@@ -3,6 +3,7 @@ const express = require('express');
 
 //* Internal Modules
 const bookmarkController = require('../controllers/bookmarkController');
+const authController = require('../controllers/authController');
 
 //* Initialize Router
 const router = express.Router();
@@ -13,13 +14,17 @@ const router = express.Router();
 //* Handle Bookmark Routes
 router
   .route('/')
-  .get(bookmarkController.getAllBookmarks)
-  .post(bookmarkController.addBookmark);
+  .get(authController.protect, bookmarkController.getAllBookmarks)
+  .post(authController.protect, bookmarkController.addBookmark);
 router
   .route('/:id')
   .get(bookmarkController.getBookmark)
   .patch(bookmarkController.updateBookmark)
-  .delete(bookmarkController.deleteBookmark);
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin'),
+    bookmarkController.deleteBookmark
+  );
 
 //* Export Router
 module.exports = router;
