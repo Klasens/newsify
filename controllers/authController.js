@@ -14,6 +14,29 @@ const signToken = (id) =>
       expiresIn: process.env.JWT_EXPIRES_IN,
     }
   );
+
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  res.cookie('jwt', token, cookieOptions);
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user: user,
+    },
+  });
+};
+
 exports.signup = async (req, res, next) => {
   try {
     const newUser = await User.create({
@@ -24,15 +47,7 @@ exports.signup = async (req, res, next) => {
       passwordChangedAt: req.body.passwordChangedAt,
       role: req.body.role,
     });
-    const token = signToken(newUser._id);
-
-    res.status(201).json({
-      status: 'success',
-      token,
-      data: {
-        user: newUser,
-      },
-    });
+    createSendToken(newUser, 201, res);
   } catch (err) {
     res.status(400).json({
       status: 'fail',
@@ -64,11 +79,7 @@ exports.login = async (req, res, next) => {
       // return next(new AppError('Incorrect email and password!', 401));
     }
     // 3) If everything is ok, send token to client
-    const token = signToken(user._id);
-    res.status(200).json({
-      status: 'success',
-      token,
-    });
+    createSendToken(user, 200, res);
   } catch (err) {
     res.status(400).json({ status: 'fail', message: err });
   }
@@ -181,7 +192,7 @@ exports.forgotPassword = async (req, res, next) => {
   } catch (err) {
     return res.status(404).json({
       status: 'fail',
-      message: 'Please provide a valid email',
+      message: err,
     });
   }
 };
@@ -213,15 +224,38 @@ exports.resetPassword = async (req, res, next) => {
     // 3) Update passwordChangedAt property
 
     // 4) Log the user in
-    const token = signToken(user._id);
-    res.status(200).json({
-      status: 'success',
-      token,
-    });
+    createSendToken(user, 200, res);
   } catch (err) {
     return res.status(404).json({
       status: 'fail',
-      message: 'Something went wrong, please try again',
+      message: err,
+    });
+  }
+};
+
+exports.updatePassword = async (req, res, next) => {
+  try {
+    // 1) Get user from collection
+    const user = await User.findById(req.user.id).select('+password');
+    // 2) Check if POSTed current password is correct
+    if (
+      !(await user.correctPassword(req.body.passwordCurrent, user.password))
+    ) {
+      return res.status(401).json({
+        status: 'fail',
+        message: 'The password you entered is incorrect',
+      });
+    }
+    // 3) If so, update password
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+    await user.save();
+    // 4) Log user in, send JWT
+    createSendToken(user, 200, res);
+  } catch (err) {
+    return res.status(404).json({
+      status: 'fail',
+      message: err,
     });
   }
 };

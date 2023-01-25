@@ -1,6 +1,11 @@
 //* External Modules
 const express = require('express');
 const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp');
 
 //* Internal Modules
 const bookmarkRouter = require('./routes/bookmarkRoutes');
@@ -11,11 +16,34 @@ const articleRouterAPI = require('./routes/articleRoutesAPI');
 //* Initializing express
 const app = express();
 
-//* ======= Middeleware ======= //
+//* ======= GLOBAL Middeleware ======= //
+//  Set Security Headers  //
+app.use(helmet());
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-app.use(express.json());
+
+//  Limit # of Requests  //
+const limiter = rateLimit({
+  max: 100,
+  windowMS: 60 * 60 * 1000,
+  message: 'Too many requests from this IP. Please try again later.',
+});
+
+app.use('/api', limiter);
+
+app.use(express.json({ limit: '10kb' }));
+
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Data sanitization against XSS
+app.use(xss());
+
+// Prevent parameter pollution
+app.use(hpp());
+
 app.use(express.static(`${__dirname}/public`));
 
 app.use((req, res, next) => {
