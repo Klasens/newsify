@@ -1,0 +1,42 @@
+header.header
+  div.logo-container
+    img(src="img/newsify.png" alt="Logo" class="header__logo")
+    span.logo-text newsify
+  form.search
+    input(type="text" class="search__field" placeholder="Search over 1,000,000 articles...")
+    button.btn.search__btn
+      svg.search__icon
+        use(href="img/icons.svg#icon-search")
+      span Search
+  nav.nav
+    if user
+      ul.nav__list
+        li.nav__item
+          button.nav__btn.nab__btn--bookmarks
+            span= 'hello ' + user.name.split(' ')[0] + '!'
+        li.nav__item
+          button.nav__btn.nab__btn--bookmarks
+            span
+              a(href="/login") Log Out 
+        li.nav__item
+          button.nav__btn.nav__btn--bookmarks
+            svg.nav__icon
+              use(href="img/icons.svg#icon-bookmark")
+            span Bookmarks
+          div.bookmarks
+            ul.bookmarks__list
+              div.message
+                div
+                  svg
+                    use(href="img/icons.svg#icon-smile")
+                p No bookmarks yet. Find a nice recipe and bookmark it
+    else
+      ul.nav__list
+        li.nav__item
+          button.nav__btn.nab__btn--bookmarks
+            span
+              a(href="/login") Log In 
+        li.nav__item
+          button.nav__btn.nab__btn--bookmarks
+            span
+              a(href="/login") Sign Up 

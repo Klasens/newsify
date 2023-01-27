@@ -85,6 +85,37 @@ exports.login = async (req, res, next) => {
   }
 };
 
+// Only for rendered pages, no errors
+exports.isLoggedIn = async (req, res, next) => {
+  try {
+    if (req.cookies.jwt) {
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      // 3) Check if user still exists
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) {
+        return next();
+      }
+      // 4) Check if user changed password after the token was issued
+      if (currentUser.changedPasswordAfter(decoded.iat)) {
+        return next();
+      }
+      // THERE IS A LOGGED IN USER
+      res.locals.user = currentUser;
+      return next();
+    }
+    next();
+  } catch (err) {
+    return res.status(401).json({
+      status: 'fail',
+      message: 'Invalid or expired token',
+    });
+  }
+};
+
 exports.protect = async (req, res, next) => {
   try {
     // 1) Get token and check if it's there
@@ -94,8 +125,9 @@ exports.protect = async (req, res, next) => {
       req.headers.authorization.startsWith('Bearer')
     ) {
       token = req.headers.authorization.split(' ')[1];
+    } else if (req.cookies.jwt) {
+      token = req.cookies.jwt;
     }
-
     if (!token) {
       return res.status(401).json({
         status: 'fail',

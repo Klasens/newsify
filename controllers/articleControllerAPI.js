@@ -26,10 +26,10 @@ const ArticleAPI = require('../models/articlesModelAPI');
 //* Article Handler Functions
 exports.getArticles = async (req, res) => {
   try {
-    const articles = await ArticleAPI.find({
-      'articles.source.id': 'wired',
-    });
-    // const articles = await ArticleAPI.find();
+    // const articles = await ArticleAPI.find({
+    //   'articles.source.id': 'wired',
+    // });
+    const articles = await ArticleAPI.find();
     res.status(200).json({
       data: { articles },
     });
