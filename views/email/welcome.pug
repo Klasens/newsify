@@ -1,0 +1,17 @@
+extends baseEmail
+
+block content
+  p Hi #{firstName},
+  p Welcome to Newsify, we're glad to have you 🎉🙏
+  p To start, try uploading a user photo so we know what you look like! 
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') Upload user photo
+  p If you have any questions, please don't hesitate to contact me. Just reply to this email!
+  p - Robert Klasen, Founder 

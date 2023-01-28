@@ -12,12 +12,12 @@ header.header
     if user
       ul.nav__list
         li.nav__item
-          button.nav__btn.nab__btn--bookmarks
-            span= 'hello ' + user.name.split(' ')[0] + '!'
-        li.nav__item
-          button.nav__btn.nab__btn--bookmarks
+          button.nav__btn.nav__btn--bookmarks
             span
-              a(href="/login") Log Out 
+              a(href="/me")= 'hello ' + user.name.split(' ')[0] + '!'
+        li.nav__item
+          button.nav__btn.nav__btn--bookmarks#logout
+            span Log Out 
         li.nav__item
           button.nav__btn.nav__btn--bookmarks
             svg.nav__icon
@@ -33,10 +33,10 @@ header.header
     else
       ul.nav__list
         li.nav__item
-          button.nav__btn.nab__btn--bookmarks
+          button.nav__btn.nav__btn--bookmarks
             span
               a(href="/login") Log In 
         li.nav__item
-          button.nav__btn.nab__btn--bookmarks
+          button.nav__btn.nav__btn--bookmarks
             span
               a(href="/login") Sign Up 

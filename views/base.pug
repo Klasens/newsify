@@ -11,13 +11,11 @@ html
 
     //- link(rel='stylesheet' href='css/style.css')
     link(rel='stylesheet' href='css/style2.css')
-    //- script(src="js/bundle.js")
 
     //- script(type="module",src="js/controller.js")
-    script(type="module",src="js/landingModal.js")
-    script(type="module",src="js/articles.js")
-    script(type="module",src="js/login.js")
-    script(type="module",src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.5/axios.min.js")
+    //- script(type="module",src="js/articles.js")
+    //- script(type="module",src="js/login.js")
+    //- script(type="module",src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.5/axios.min.js")
   body#noScroll
     div.container
       // LANDING MODAL
@@ -27,4 +25,6 @@ html
       // CONTENT
       block content
 
+    script(type="module",src="js/landingModal.js")
+    script(src="js/bundle.js")
 
