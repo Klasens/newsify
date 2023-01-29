@@ -7,6 +7,7 @@ const form = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('#logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
+const searchBtn = document.querySelector('.search__btn');
 
 if (form)
   form.addEventListener('submit', (e) => {
@@ -46,4 +47,9 @@ if (userPasswordForm)
     document.getElementById('password').value = '';
     document.getElementById('password-confirm').value = '';
     document.getElementById('btnPassword').textContent = 'Save Password';
+  });
+
+if (searchBtn)
+  searchBtn.addEventListener('click', function (e) {
+    e.preventDefault();
   });

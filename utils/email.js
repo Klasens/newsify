@@ -69,6 +69,7 @@ module.exports = class Email {
       console.log(err);
     }
   }
+
   async sendPasswordReset() {
     try {
       await this.send(
