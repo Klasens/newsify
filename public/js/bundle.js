@@ -11951,6 +11951,7 @@ var showAlert = function showAlert(type, msg) {
 };
 exports.showAlert = showAlert;
 },{}],"login.js":[function(require,module,exports) {
+var define;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11974,7 +11975,7 @@ var login = /*#__PURE__*/function () {
           _context.next = 3;
           return (0, _axios.default)({
             method: 'POST',
-            url: 'http://127.0.0.1:3000/api/v1/users/login',
+            url: "".concat(undefined, "/api/v1/users/login"),
             data: {
               email: email,
               password: password
@@ -12310,7 +12311,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58354" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64734" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
