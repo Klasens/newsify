@@ -1,13 +1,21 @@
 /**============================================
    *              MAIN 
    *=============================================**/
+
+//base
 @import 'media-breakpoints';
 @import 'variables';
 @import 'base';
 
+//utils
+@import 'alert';
+
+//partials
 @import 'header';
 @import 'footer';
 @import 'content';
 @import 'btn';
 
+//pages
 @import 'login';
+@import 'overview';

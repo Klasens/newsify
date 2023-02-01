@@ -1,4 +1,43 @@
-extends base
+extends base_2 
 
 block content
-  .content
+  div.modal__container.showModal
+    div.modal__details
+      h1.modal__title.modal__title--h1 Newsify One Sheet
+      p.modal__text Newsify is a news article aggregation app that hooks into the GNews API. Searching keywords returns the total number of matching articles along with the top ten articles from each search. To bookmark articles, input custom titles, and access other features, create an account using the sign up button below.
+      a(href="/signUp") 
+        div.modal__btn--signUp Sign Up
+    div.modal__headers--container
+      div#tech.modal__list--container
+        h3.modal__title.modal__title--h3 Technology Stack
+        ul.modal__list
+          li.list-item Node.js (Express)
+          li.list-item MongoDb (Mongoose)
+          li.list-item JavaScript
+          li.list-item CSS (Sass)
+          li.list-item Pug (Server Side Rendering)
+      div#data.modal__list--container
+        h3.modal__title.modal__title--h3 Data Sets & Models
+        ul.modal__list
+          li.list-item NoSQL (Embbeded Documents)
+          li.list-item articles &mdash; Client Side
+          li.list-item users &mdash; MongoDb
+          li.list-item bookmarks &mdash; MongoDb
+          li.list-item curatedNewsLists &mdash; In Development
+      div#security.modal__list--container
+        h3.modal__title.modal__title--h3 Security (Middleware Stack)
+        ul.modal__list
+          li.list-item helmet &mdash; Set Security Headers
+          li.list-item hpp &mdash; Prevent Parameter Pollution 
+          li.list-item xss-clean &mdash; Sanitize User Input Data          
+          li.list-item mongo-sanitize &mdash; Sanitize Query Injection          
+          li.list-item express-rate-limit &mdash; Limit Requests By IP
+      div#api.modal__list--container
+        h3.modal__title.modal__title--h3 APIs & Authentication
+        ul.modal__list
+          li.list-item JSON Web Tokens
+          li.list-item BCrypt (12 Salt Rounds)
+          li.list-item Nodemailer
+          li.list-item Newsify API
+          li.list-item
+            a(href="https://gnews.io/" class="list-item__link") GNews API (Documentation)

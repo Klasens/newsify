@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**============================================
    *              MAIN 
    *=============================================**/
@@ -35,6 +36,32 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: calc(100vh - 2 * 4vw); }
+
+a {
+  text-decoration: none; }
+
+.alert {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 1.6rem 15rem;
+  -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25); }
+
+.alert--success {
+  background-color: #20bf6b; }
+
+.alert--error {
+  background-color: #eb4d4b; }
 
 /**============================================
    *              HEADER 
@@ -286,6 +313,57 @@ h5 {
       display: flex;
       flex-direction: column; } }
 
+.container--2 {
+  max-width: 120rem;
+  margin: 4vw auto;
+  background-color: #1abc9c;
+  border-radius: 9px;
+  overflow: hidden;
+  box-shadow: 0 2rem 6rem 0.5rem rgba(77, 69, 66, 0.2);
+  display: flex;
+  flex-direction: column;
+  /**============================================
+   *             Mobile Small - 600
+@include respond(break-600) {}
+   *=============================================**/
+  /**============================================
+   *             Mobile Large - 850
+@include respond(break-850) {}
+   *=============================================**/
+  /**============================================
+   *                Tablet - 1000
+@include respond(break-1000) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Small - 1200
+   @include respond(break-1250) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1400) {}
+   *=============================================**/
+  /**============================================
+   *                Larger than - 1600
+   @include respond(break-greater-1600) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1600) {}
+   *=============================================**/
+  /**============================================
+   *                Telvision/Projector > 1800
+   @include respond(break-1800) {}
+   *=============================================**/ }
+  @media only screen and (max-width: 78.15em) {
+    .container--2 {
+      max-width: 100%;
+      margin: 0;
+      border-radius: 0; } }
+  @media (max-width: 37.5em) {
+    .container--2 {
+      display: flex;
+      flex-direction: column; } }
+
 .content {
   grid-area: content; }
 
@@ -406,3 +484,133 @@ h2 {
 .form__btn {
   display: flex;
   justify-content: center; }
+
+.modal__container {
+  border: 1px solid #fff;
+  color: #fff;
+  background-color: #1abc9c;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  transition: all 0.5s;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem #05071f4d; }
+
+@media (max-width: 53.125em) {
+  .modal__container {
+    width: 60rem; } }
+
+@media (max-width: 37.5em) {
+  .modal__container {
+    width: 35rem;
+    padding: 1rem 2rem; } }
+
+.modal__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+@media (max-width: 37.5em) {
+  .modal__details {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem; } }
+
+.modal__title {
+  font-size: 4rem;
+  font-weight: 300; }
+
+.modal__title--h1 {
+  border-bottom: 3px solid #fff; }
+
+.modal__title--h3 {
+  width: 100%;
+  font-size: 2.5rem;
+  font-weight: 300;
+  text-decoration: underline;
+  position: relative; }
+
+.modal__title--h3:before {
+  content: '→';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -3rem; }
+
+.list-item__link {
+  color: #ffd849; }
+
+.modal__list {
+  font-size: 1.6rem;
+  line-height: 1.3; }
+
+.modal__list--container {
+  margin-left: 3rem;
+  padding: 2rem; }
+
+.modal__description {
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  font-style: italic; }
+
+.modal__text {
+  width: 45%;
+  padding: 1rem 0;
+  font-size: 1.7rem; }
+
+@media (max-width: 37.5em) {
+  .modal__text {
+    padding: 0 1rem; } }
+
+.modal__headers--container {
+  width: 65%;
+  border-top: 2px solid #fff;
+  display: grid;
+  grid-template-areas: 'tech security' 'data API';
+  padding: 2rem 1rem; }
+
+#tech {
+  grid-area: tech; }
+
+#data {
+  grid-area: data; }
+
+#security {
+  grid-area: security; }
+
+#api {
+  grid-area: API; }
+
+.modal__btn {
+  color: inherit;
+  letter-spacing: 0.2rem;
+  cursor: pointer;
+  background: none;
+  border: 1px solid #fff6;
+  border-radius: 100rem;
+  padding: 1rem 1.6rem;
+  font-family: inherit;
+  font-size: 1.4rem;
+  transition: all 0.2s; }
+
+.modal__btn:hover,
+.modal__btn:focus {
+  border-color: #fff9;
+  transform: translateY(-0.2rem); }
+
+.modal__btn--signUp {
+  color: #000;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #ffd848;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  padding: 0.5rem 2rem;
+  font-size: 2.5rem;
+  box-shadow: 5px 5px 10px #414141;
+  transition: all 0.3s; }
+
+.modal__btn--signUp:hover {
+  border-color: red;
+  transform: translateY(-0.2rem); }

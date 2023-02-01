@@ -6669,7 +6669,7 @@ try {
   }
 }
 
-},{}],"../../../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6681,7 +6681,7 @@ function bind(fn, thisArg) {
     return fn.apply(thisArg, arguments);
   };
 }
-},{}],"../../../node_modules/axios/lib/utils.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/utils.js":[function(require,module,exports) {
 var global = arguments[3];
 var define;
 'use strict';
@@ -7189,7 +7189,7 @@ const matchAll = (regExp, str) => {
 /* Checking if the kindOfTest function returns true when passed an HTMLFormElement. */
 const isHTMLForm = kindOfTest('HTMLFormElement');
 const toCamelCase = str => {
-  return str.toLowerCase().replace(/[_-\s]([a-z\d])(\w*)/g, function replacer(m, p1, p2) {
+  return str.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g, function replacer(m, p1, p2) {
     return p1.toUpperCase() + p2;
   });
 };
@@ -7258,6 +7258,34 @@ const toFiniteNumber = (value, defaultValue) => {
   value = +value;
   return Number.isFinite(value) ? value : defaultValue;
 };
+const ALPHA = 'abcdefghijklmnopqrstuvwxyz';
+const DIGIT = '0123456789';
+const ALPHABET = {
+  DIGIT,
+  ALPHA,
+  ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
+};
+const generateString = (size = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
+  let str = '';
+  const {
+    length
+  } = alphabet;
+  while (size--) {
+    str += alphabet[Math.random() * length | 0];
+  }
+  return str;
+};
+
+/**
+ * If the thing is a FormData object, return true, otherwise return false.
+ *
+ * @param {unknown} thing - The thing to check.
+ *
+ * @returns {boolean}
+ */
+function isSpecCompliantForm(thing) {
+  return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === 'FormData' && thing[Symbol.iterator]);
+}
 const toJSONObject = obj => {
   const stack = new Array(10);
   const visit = (source, i) => {
@@ -7327,10 +7355,13 @@ var _default = {
   findKey,
   global: _global,
   isContextDefined,
+  ALPHABET,
+  generateString,
+  isSpecCompliantForm,
   toJSONObject
 };
 exports.default = _default;
-},{"./helpers/bind.js":"../../../node_modules/axios/lib/helpers/bind.js"}],"../../../node_modules/axios/lib/core/AxiosError.js":[function(require,module,exports) {
+},{"./helpers/bind.js":"../../node_modules/axios/lib/helpers/bind.js"}],"../../node_modules/axios/lib/core/AxiosError.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7415,22 +7446,17 @@ AxiosError.from = (error, code, config, request, response, customProps) => {
 };
 var _default = AxiosError;
 exports.default = _default;
-},{"../utils.js":"../../../node_modules/axios/lib/utils.js"}],"../../../node_modules/form-data/lib/browser.js":[function(require,module,exports) {
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-/* eslint-env browser */
-module.exports = (typeof self === "undefined" ? "undefined" : _typeof(self)) == 'object' ? self.FormData : window.FormData;
-},{}],"../../../node_modules/axios/lib/env/classes/FormData.js":[function(require,module,exports) {
+},{"../utils.js":"../../node_modules/axios/lib/utils.js"}],"../../node_modules/axios/lib/helpers/null.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _formData = _interopRequireDefault(require("form-data"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var _default = _formData.default;
+// eslint-disable-next-line strict
+var _default = null;
 exports.default = _default;
-},{"form-data":"../../../node_modules/form-data/lib/browser.js"}],"../../node_modules/base64-js/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -9469,7 +9495,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":"../../node_modules/base64-js/index.js","ieee754":"../../node_modules/ieee754/index.js","isarray":"../../node_modules/node-libs-browser/node_modules/isarray/index.js","buffer":"../../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"../../../node_modules/axios/lib/helpers/toFormData.js":[function(require,module,exports) {
+},{"base64-js":"../../node_modules/base64-js/index.js","ieee754":"../../node_modules/ieee754/index.js","isarray":"../../node_modules/node-libs-browser/node_modules/isarray/index.js","buffer":"../../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"../../node_modules/axios/lib/helpers/toFormData.js":[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -9479,8 +9505,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _utils = _interopRequireDefault(require("../utils.js"));
 var _AxiosError = _interopRequireDefault(require("../core/AxiosError.js"));
-var _FormData = _interopRequireDefault(require("../env/classes/FormData.js"));
+var _FormData = _interopRequireDefault(require("../platform/node/classes/FormData.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// temporary hotfix to avoid circular references until AxiosURLSearchParams is refactored
+
 /**
  * Determines if the given thing is a array or js object.
  *
@@ -9536,17 +9564,6 @@ const predicates = _utils.default.toFlatObject(_utils.default, {}, null, functio
 });
 
 /**
- * If the thing is a FormData object, return true, otherwise return false.
- *
- * @param {unknown} thing - The thing to check.
- *
- * @returns {boolean}
- */
-function isSpecCompliant(thing) {
-  return thing && _utils.default.isFunction(thing.append) && thing[Symbol.toStringTag] === 'FormData' && thing[Symbol.iterator];
-}
-
-/**
  * Convert a data object to FormData
  *
  * @param {Object} obj
@@ -9592,7 +9609,7 @@ function toFormData(obj, formData, options) {
   const dots = options.dots;
   const indexes = options.indexes;
   const _Blob = options.Blob || typeof Blob !== 'undefined' && Blob;
-  const useBlob = _Blob && isSpecCompliant(formData);
+  const useBlob = _Blob && _utils.default.isSpecCompliantForm(formData);
   if (!_utils.default.isFunction(visitor)) {
     throw new TypeError('visitor must be a function');
   }
@@ -9673,7 +9690,7 @@ function toFormData(obj, formData, options) {
 }
 var _default = toFormData;
 exports.default = _default;
-},{"../utils.js":"../../../node_modules/axios/lib/utils.js","../core/AxiosError.js":"../../../node_modules/axios/lib/core/AxiosError.js","../env/classes/FormData.js":"../../../node_modules/axios/lib/env/classes/FormData.js","buffer":"../../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"../../../node_modules/axios/lib/helpers/AxiosURLSearchParams.js":[function(require,module,exports) {
+},{"../utils.js":"../../node_modules/axios/lib/utils.js","../core/AxiosError.js":"../../node_modules/axios/lib/core/AxiosError.js","../platform/node/classes/FormData.js":"../../node_modules/axios/lib/helpers/null.js","buffer":"../../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"../../node_modules/axios/lib/helpers/AxiosURLSearchParams.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9731,7 +9748,7 @@ prototype.toString = function toString(encoder) {
 };
 var _default = AxiosURLSearchParams;
 exports.default = _default;
-},{"./toFormData.js":"../../../node_modules/axios/lib/helpers/toFormData.js"}],"../../../node_modules/axios/lib/helpers/buildURL.js":[function(require,module,exports) {
+},{"./toFormData.js":"../../node_modules/axios/lib/helpers/toFormData.js"}],"../../node_modules/axios/lib/helpers/buildURL.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9784,7 +9801,7 @@ function buildURL(url, params, options) {
   }
   return url;
 }
-},{"../utils.js":"../../../node_modules/axios/lib/utils.js","../helpers/AxiosURLSearchParams.js":"../../../node_modules/axios/lib/helpers/AxiosURLSearchParams.js"}],"../../../node_modules/axios/lib/core/InterceptorManager.js":[function(require,module,exports) {
+},{"../utils.js":"../../node_modules/axios/lib/utils.js","../helpers/AxiosURLSearchParams.js":"../../node_modules/axios/lib/helpers/AxiosURLSearchParams.js"}],"../../node_modules/axios/lib/core/InterceptorManager.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9860,7 +9877,7 @@ class InterceptorManager {
 }
 var _default = InterceptorManager;
 exports.default = _default;
-},{"./../utils.js":"../../../node_modules/axios/lib/utils.js"}],"../../../node_modules/axios/lib/defaults/transitional.js":[function(require,module,exports) {
+},{"./../utils.js":"../../node_modules/axios/lib/utils.js"}],"../../node_modules/axios/lib/defaults/transitional.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9873,7 +9890,7 @@ var _default = {
   clarifyTimeoutError: false
 };
 exports.default = _default;
-},{}],"../../../node_modules/axios/lib/platform/browser/classes/URLSearchParams.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/platform/browser/classes/URLSearchParams.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9884,7 +9901,7 @@ var _AxiosURLSearchParams = _interopRequireDefault(require("../../../helpers/Axi
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var _default = typeof URLSearchParams !== 'undefined' ? URLSearchParams : _AxiosURLSearchParams.default;
 exports.default = _default;
-},{"../../../helpers/AxiosURLSearchParams.js":"../../../node_modules/axios/lib/helpers/AxiosURLSearchParams.js"}],"../../../node_modules/axios/lib/platform/browser/classes/FormData.js":[function(require,module,exports) {
+},{"../../../helpers/AxiosURLSearchParams.js":"../../node_modules/axios/lib/helpers/AxiosURLSearchParams.js"}],"../../node_modules/axios/lib/platform/browser/classes/FormData.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9893,7 +9910,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = FormData;
 exports.default = _default;
-},{}],"../../../node_modules/axios/lib/platform/browser/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/platform/browser/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9954,7 +9971,7 @@ var _default = {
   protocols: ['http', 'https', 'file', 'blob', 'url', 'data']
 };
 exports.default = _default;
-},{"./classes/URLSearchParams.js":"../../../node_modules/axios/lib/platform/browser/classes/URLSearchParams.js","./classes/FormData.js":"../../../node_modules/axios/lib/platform/browser/classes/FormData.js"}],"../../../node_modules/axios/lib/platform/index.js":[function(require,module,exports) {
+},{"./classes/URLSearchParams.js":"../../node_modules/axios/lib/platform/browser/classes/URLSearchParams.js","./classes/FormData.js":"../../node_modules/axios/lib/platform/browser/classes/FormData.js"}],"../../node_modules/axios/lib/platform/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9968,7 +9985,7 @@ Object.defineProperty(exports, "default", {
 });
 var _index = _interopRequireDefault(require("./node/index.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./node/index.js":"../../../node_modules/axios/lib/platform/browser/index.js"}],"../../../node_modules/axios/lib/helpers/toURLEncodedForm.js":[function(require,module,exports) {
+},{"./node/index.js":"../../node_modules/axios/lib/platform/browser/index.js"}],"../../node_modules/axios/lib/helpers/toURLEncodedForm.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9990,7 +10007,7 @@ function toURLEncodedForm(data, options) {
     }
   }, options));
 }
-},{"../utils.js":"../../../node_modules/axios/lib/utils.js","./toFormData.js":"../../../node_modules/axios/lib/helpers/toFormData.js","../platform/index.js":"../../../node_modules/axios/lib/platform/index.js"}],"../../../node_modules/axios/lib/helpers/formDataToJSON.js":[function(require,module,exports) {
+},{"../utils.js":"../../node_modules/axios/lib/utils.js","./toFormData.js":"../../node_modules/axios/lib/helpers/toFormData.js","../platform/index.js":"../../node_modules/axios/lib/platform/index.js"}],"../../node_modules/axios/lib/helpers/formDataToJSON.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10077,7 +10094,7 @@ function formDataToJSON(formData) {
 }
 var _default = formDataToJSON;
 exports.default = _default;
-},{"../utils.js":"../../../node_modules/axios/lib/utils.js"}],"../../../node_modules/axios/lib/defaults/index.js":[function(require,module,exports) {
+},{"../utils.js":"../../node_modules/axios/lib/utils.js"}],"../../node_modules/axios/lib/defaults/index.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10214,7 +10231,7 @@ _utils.default.forEach(['post', 'put', 'patch'], function forEachMethodWithData(
 });
 var _default = defaults;
 exports.default = _default;
-},{"../utils.js":"../../../node_modules/axios/lib/utils.js","../core/AxiosError.js":"../../../node_modules/axios/lib/core/AxiosError.js","./transitional.js":"../../../node_modules/axios/lib/defaults/transitional.js","../helpers/toFormData.js":"../../../node_modules/axios/lib/helpers/toFormData.js","../helpers/toURLEncodedForm.js":"../../../node_modules/axios/lib/helpers/toURLEncodedForm.js","../platform/index.js":"../../../node_modules/axios/lib/platform/index.js","../helpers/formDataToJSON.js":"../../../node_modules/axios/lib/helpers/formDataToJSON.js"}],"../../../node_modules/axios/lib/helpers/parseHeaders.js":[function(require,module,exports) {
+},{"../utils.js":"../../node_modules/axios/lib/utils.js","../core/AxiosError.js":"../../node_modules/axios/lib/core/AxiosError.js","./transitional.js":"../../node_modules/axios/lib/defaults/transitional.js","../helpers/toFormData.js":"../../node_modules/axios/lib/helpers/toFormData.js","../helpers/toURLEncodedForm.js":"../../node_modules/axios/lib/helpers/toURLEncodedForm.js","../platform/index.js":"../../node_modules/axios/lib/platform/index.js","../helpers/formDataToJSON.js":"../../node_modules/axios/lib/helpers/formDataToJSON.js"}],"../../node_modules/axios/lib/helpers/parseHeaders.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10266,7 +10283,7 @@ var _default = rawHeaders => {
   return parsed;
 };
 exports.default = _default;
-},{"./../utils.js":"../../../node_modules/axios/lib/utils.js"}],"../../../node_modules/axios/lib/core/AxiosHeaders.js":[function(require,module,exports) {
+},{"./../utils.js":"../../node_modules/axios/lib/utils.js"}],"../../node_modules/axios/lib/core/AxiosHeaders.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10402,8 +10419,18 @@ class AxiosHeaders {
     }
     return deleted;
   }
-  clear() {
-    return Object.keys(this).forEach(this.delete.bind(this));
+  clear(matcher) {
+    const keys = Object.keys(this);
+    let i = keys.length;
+    let deleted = false;
+    while (i--) {
+      const key = keys[i];
+      if (!matcher || matchHeaderValue(this, this[key], key, matcher)) {
+        delete this[key];
+        deleted = true;
+      }
+    }
+    return deleted;
   }
   normalize(format) {
     const self = this;
@@ -10468,12 +10495,12 @@ class AxiosHeaders {
     return this;
   }
 }
-AxiosHeaders.accessor(['Content-Type', 'Content-Length', 'Accept', 'Accept-Encoding', 'User-Agent']);
+AxiosHeaders.accessor(['Content-Type', 'Content-Length', 'Accept', 'Accept-Encoding', 'User-Agent', 'Authorization']);
 _utils.default.freezeMethods(AxiosHeaders.prototype);
 _utils.default.freezeMethods(AxiosHeaders);
 var _default = AxiosHeaders;
 exports.default = _default;
-},{"../utils.js":"../../../node_modules/axios/lib/utils.js","../helpers/parseHeaders.js":"../../../node_modules/axios/lib/helpers/parseHeaders.js"}],"../../../node_modules/axios/lib/core/transformData.js":[function(require,module,exports) {
+},{"../utils.js":"../../node_modules/axios/lib/utils.js","../helpers/parseHeaders.js":"../../node_modules/axios/lib/helpers/parseHeaders.js"}],"../../node_modules/axios/lib/core/transformData.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10503,7 +10530,7 @@ function transformData(fns, response) {
   headers.normalize();
   return data;
 }
-},{"./../utils.js":"../../../node_modules/axios/lib/utils.js","../defaults/index.js":"../../../node_modules/axios/lib/defaults/index.js","../core/AxiosHeaders.js":"../../../node_modules/axios/lib/core/AxiosHeaders.js"}],"../../../node_modules/axios/lib/cancel/isCancel.js":[function(require,module,exports) {
+},{"./../utils.js":"../../node_modules/axios/lib/utils.js","../defaults/index.js":"../../node_modules/axios/lib/defaults/index.js","../core/AxiosHeaders.js":"../../node_modules/axios/lib/core/AxiosHeaders.js"}],"../../node_modules/axios/lib/cancel/isCancel.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10513,7 +10540,7 @@ exports.default = isCancel;
 function isCancel(value) {
   return !!(value && value.__CANCEL__);
 }
-},{}],"../../../node_modules/axios/lib/cancel/CanceledError.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/cancel/CanceledError.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10542,17 +10569,7 @@ _utils.default.inherits(CanceledError, _AxiosError.default, {
 });
 var _default = CanceledError;
 exports.default = _default;
-},{"../core/AxiosError.js":"../../../node_modules/axios/lib/core/AxiosError.js","../utils.js":"../../../node_modules/axios/lib/utils.js"}],"../../../node_modules/axios/lib/helpers/null.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-// eslint-disable-next-line strict
-var _default = null;
-exports.default = _default;
-},{}],"../../../node_modules/axios/lib/core/settle.js":[function(require,module,exports) {
+},{"../core/AxiosError.js":"../../node_modules/axios/lib/core/AxiosError.js","../utils.js":"../../node_modules/axios/lib/utils.js"}],"../../node_modules/axios/lib/core/settle.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10578,7 +10595,7 @@ function settle(resolve, reject, response) {
     reject(new _AxiosError.default('Request failed with status code ' + response.status, [_AxiosError.default.ERR_BAD_REQUEST, _AxiosError.default.ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4], response.config, response.request, response));
   }
 }
-},{"./AxiosError.js":"../../../node_modules/axios/lib/core/AxiosError.js"}],"../../../node_modules/axios/lib/helpers/cookies.js":[function(require,module,exports) {
+},{"./AxiosError.js":"../../node_modules/axios/lib/core/AxiosError.js"}],"../../node_modules/axios/lib/helpers/cookies.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10629,7 +10646,7 @@ function nonStandardBrowserEnv() {
   };
 }();
 exports.default = _default;
-},{"./../utils.js":"../../../node_modules/axios/lib/utils.js","../platform/index.js":"../../../node_modules/axios/lib/platform/index.js"}],"../../../node_modules/axios/lib/helpers/isAbsoluteURL.js":[function(require,module,exports) {
+},{"./../utils.js":"../../node_modules/axios/lib/utils.js","../platform/index.js":"../../node_modules/axios/lib/platform/index.js"}],"../../node_modules/axios/lib/helpers/isAbsoluteURL.js":[function(require,module,exports) {
 'use strict';
 
 /**
@@ -10649,7 +10666,7 @@ function isAbsoluteURL(url) {
   // by any combination of letters, digits, plus, period, or hyphen.
   return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
 }
-},{}],"../../../node_modules/axios/lib/helpers/combineURLs.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/helpers/combineURLs.js":[function(require,module,exports) {
 'use strict';
 
 /**
@@ -10667,7 +10684,7 @@ exports.default = combineURLs;
 function combineURLs(baseURL, relativeURL) {
   return relativeURL ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL;
 }
-},{}],"../../../node_modules/axios/lib/core/buildFullPath.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/core/buildFullPath.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10693,7 +10710,7 @@ function buildFullPath(baseURL, requestedURL) {
   }
   return requestedURL;
 }
-},{"../helpers/isAbsoluteURL.js":"../../../node_modules/axios/lib/helpers/isAbsoluteURL.js","../helpers/combineURLs.js":"../../../node_modules/axios/lib/helpers/combineURLs.js"}],"../../../node_modules/axios/lib/helpers/isURLSameOrigin.js":[function(require,module,exports) {
+},{"../helpers/isAbsoluteURL.js":"../../node_modules/axios/lib/helpers/isAbsoluteURL.js","../helpers/combineURLs.js":"../../node_modules/axios/lib/helpers/combineURLs.js"}],"../../node_modules/axios/lib/helpers/isURLSameOrigin.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10758,7 +10775,7 @@ function nonStandardBrowserEnv() {
   };
 }();
 exports.default = _default;
-},{"./../utils.js":"../../../node_modules/axios/lib/utils.js","../platform/index.js":"../../../node_modules/axios/lib/platform/index.js"}],"../../../node_modules/axios/lib/helpers/parseProtocol.js":[function(require,module,exports) {
+},{"./../utils.js":"../../node_modules/axios/lib/utils.js","../platform/index.js":"../../node_modules/axios/lib/platform/index.js"}],"../../node_modules/axios/lib/helpers/parseProtocol.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10769,7 +10786,7 @@ function parseProtocol(url) {
   const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url);
   return match && match[1] || '';
 }
-},{}],"../../../node_modules/axios/lib/helpers/speedometer.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/helpers/speedometer.js":[function(require,module,exports) {
 'use strict';
 
 /**
@@ -10817,7 +10834,7 @@ function speedometer(samplesCount, min) {
 }
 var _default = speedometer;
 exports.default = _default;
-},{}],"../../../node_modules/axios/lib/adapters/xhr.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/adapters/xhr.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11043,7 +11060,7 @@ var _default = isXHRAdapterSupported && function (config) {
   });
 };
 exports.default = _default;
-},{"./../utils.js":"../../../node_modules/axios/lib/utils.js","./../core/settle.js":"../../../node_modules/axios/lib/core/settle.js","./../helpers/cookies.js":"../../../node_modules/axios/lib/helpers/cookies.js","./../helpers/buildURL.js":"../../../node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath.js":"../../../node_modules/axios/lib/core/buildFullPath.js","./../helpers/isURLSameOrigin.js":"../../../node_modules/axios/lib/helpers/isURLSameOrigin.js","../defaults/transitional.js":"../../../node_modules/axios/lib/defaults/transitional.js","../core/AxiosError.js":"../../../node_modules/axios/lib/core/AxiosError.js","../cancel/CanceledError.js":"../../../node_modules/axios/lib/cancel/CanceledError.js","../helpers/parseProtocol.js":"../../../node_modules/axios/lib/helpers/parseProtocol.js","../platform/index.js":"../../../node_modules/axios/lib/platform/index.js","../core/AxiosHeaders.js":"../../../node_modules/axios/lib/core/AxiosHeaders.js","../helpers/speedometer.js":"../../../node_modules/axios/lib/helpers/speedometer.js"}],"../../../node_modules/axios/lib/adapters/adapters.js":[function(require,module,exports) {
+},{"./../utils.js":"../../node_modules/axios/lib/utils.js","./../core/settle.js":"../../node_modules/axios/lib/core/settle.js","./../helpers/cookies.js":"../../node_modules/axios/lib/helpers/cookies.js","./../helpers/buildURL.js":"../../node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath.js":"../../node_modules/axios/lib/core/buildFullPath.js","./../helpers/isURLSameOrigin.js":"../../node_modules/axios/lib/helpers/isURLSameOrigin.js","../defaults/transitional.js":"../../node_modules/axios/lib/defaults/transitional.js","../core/AxiosError.js":"../../node_modules/axios/lib/core/AxiosError.js","../cancel/CanceledError.js":"../../node_modules/axios/lib/cancel/CanceledError.js","../helpers/parseProtocol.js":"../../node_modules/axios/lib/helpers/parseProtocol.js","../platform/index.js":"../../node_modules/axios/lib/platform/index.js","../core/AxiosHeaders.js":"../../node_modules/axios/lib/core/AxiosHeaders.js","../helpers/speedometer.js":"../../node_modules/axios/lib/helpers/speedometer.js"}],"../../node_modules/axios/lib/adapters/adapters.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11101,7 +11118,7 @@ var _default = {
   adapters: knownAdapters
 };
 exports.default = _default;
-},{"../utils.js":"../../../node_modules/axios/lib/utils.js","./http.js":"../../../node_modules/axios/lib/helpers/null.js","./xhr.js":"../../../node_modules/axios/lib/adapters/xhr.js","../core/AxiosError.js":"../../../node_modules/axios/lib/core/AxiosError.js"}],"../../../node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
+},{"../utils.js":"../../node_modules/axios/lib/utils.js","./http.js":"../../node_modules/axios/lib/helpers/null.js","./xhr.js":"../../node_modules/axios/lib/adapters/xhr.js","../core/AxiosError.js":"../../node_modules/axios/lib/core/AxiosError.js"}],"../../node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11168,7 +11185,7 @@ function dispatchRequest(config) {
     return Promise.reject(reason);
   });
 }
-},{"./transformData.js":"../../../node_modules/axios/lib/core/transformData.js","../cancel/isCancel.js":"../../../node_modules/axios/lib/cancel/isCancel.js","../defaults/index.js":"../../../node_modules/axios/lib/defaults/index.js","../cancel/CanceledError.js":"../../../node_modules/axios/lib/cancel/CanceledError.js","../core/AxiosHeaders.js":"../../../node_modules/axios/lib/core/AxiosHeaders.js","../adapters/adapters.js":"../../../node_modules/axios/lib/adapters/adapters.js"}],"../../../node_modules/axios/lib/core/mergeConfig.js":[function(require,module,exports) {
+},{"./transformData.js":"../../node_modules/axios/lib/core/transformData.js","../cancel/isCancel.js":"../../node_modules/axios/lib/cancel/isCancel.js","../defaults/index.js":"../../node_modules/axios/lib/defaults/index.js","../cancel/CanceledError.js":"../../node_modules/axios/lib/cancel/CanceledError.js","../core/AxiosHeaders.js":"../../node_modules/axios/lib/core/AxiosHeaders.js","../adapters/adapters.js":"../../node_modules/axios/lib/adapters/adapters.js"}],"../../node_modules/axios/lib/core/mergeConfig.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11276,16 +11293,16 @@ function mergeConfig(config1, config2) {
   });
   return config;
 }
-},{"../utils.js":"../../../node_modules/axios/lib/utils.js","./AxiosHeaders.js":"../../../node_modules/axios/lib/core/AxiosHeaders.js"}],"../../../node_modules/axios/lib/env/data.js":[function(require,module,exports) {
+},{"../utils.js":"../../node_modules/axios/lib/utils.js","./AxiosHeaders.js":"../../node_modules/axios/lib/core/AxiosHeaders.js"}],"../../node_modules/axios/lib/env/data.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.VERSION = void 0;
-const VERSION = "1.2.5";
+const VERSION = "1.3.0";
 exports.VERSION = VERSION;
-},{}],"../../../node_modules/axios/lib/helpers/validator.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/helpers/validator.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11370,7 +11387,7 @@ var _default = {
   validators
 };
 exports.default = _default;
-},{"../env/data.js":"../../../node_modules/axios/lib/env/data.js","../core/AxiosError.js":"../../../node_modules/axios/lib/core/AxiosError.js"}],"../../../node_modules/axios/lib/core/Axios.js":[function(require,module,exports) {
+},{"../env/data.js":"../../node_modules/axios/lib/env/data.js","../core/AxiosError.js":"../../node_modules/axios/lib/core/AxiosError.js"}],"../../node_modules/axios/lib/core/Axios.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11543,7 +11560,7 @@ _utils.default.forEach(['post', 'put', 'patch'], function forEachMethodWithData(
 });
 var _default = Axios;
 exports.default = _default;
-},{"./../utils.js":"../../../node_modules/axios/lib/utils.js","../helpers/buildURL.js":"../../../node_modules/axios/lib/helpers/buildURL.js","./InterceptorManager.js":"../../../node_modules/axios/lib/core/InterceptorManager.js","./dispatchRequest.js":"../../../node_modules/axios/lib/core/dispatchRequest.js","./mergeConfig.js":"../../../node_modules/axios/lib/core/mergeConfig.js","./buildFullPath.js":"../../../node_modules/axios/lib/core/buildFullPath.js","../helpers/validator.js":"../../../node_modules/axios/lib/helpers/validator.js","./AxiosHeaders.js":"../../../node_modules/axios/lib/core/AxiosHeaders.js"}],"../../../node_modules/axios/lib/cancel/CancelToken.js":[function(require,module,exports) {
+},{"./../utils.js":"../../node_modules/axios/lib/utils.js","../helpers/buildURL.js":"../../node_modules/axios/lib/helpers/buildURL.js","./InterceptorManager.js":"../../node_modules/axios/lib/core/InterceptorManager.js","./dispatchRequest.js":"../../node_modules/axios/lib/core/dispatchRequest.js","./mergeConfig.js":"../../node_modules/axios/lib/core/mergeConfig.js","./buildFullPath.js":"../../node_modules/axios/lib/core/buildFullPath.js","../helpers/validator.js":"../../node_modules/axios/lib/helpers/validator.js","./AxiosHeaders.js":"../../node_modules/axios/lib/core/AxiosHeaders.js"}],"../../node_modules/axios/lib/cancel/CancelToken.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11659,7 +11676,7 @@ class CancelToken {
 }
 var _default = CancelToken;
 exports.default = _default;
-},{"./CanceledError.js":"../../../node_modules/axios/lib/cancel/CanceledError.js"}],"../../../node_modules/axios/lib/helpers/spread.js":[function(require,module,exports) {
+},{"./CanceledError.js":"../../node_modules/axios/lib/cancel/CanceledError.js"}],"../../node_modules/axios/lib/helpers/spread.js":[function(require,module,exports) {
 'use strict';
 
 /**
@@ -11692,7 +11709,7 @@ function spread(callback) {
     return callback.apply(null, arr);
   };
 }
-},{}],"../../../node_modules/axios/lib/helpers/isAxiosError.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/helpers/isAxiosError.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11711,7 +11728,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function isAxiosError(payload) {
   return _utils.default.isObject(payload) && payload.isAxiosError === true;
 }
-},{"./../utils.js":"../../../node_modules/axios/lib/utils.js"}],"../../../node_modules/axios/lib/helpers/HttpStatusCode.js":[function(require,module,exports) {
+},{"./../utils.js":"../../node_modules/axios/lib/utils.js"}],"../../node_modules/axios/lib/helpers/HttpStatusCode.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11788,7 +11805,7 @@ Object.entries(HttpStatusCode).forEach(([key, value]) => {
 });
 var _default = HttpStatusCode;
 exports.default = _default;
-},{}],"../../../node_modules/axios/lib/axios.js":[function(require,module,exports) {
+},{}],"../../node_modules/axios/lib/axios.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11878,7 +11895,7 @@ axios.default = axios;
 // this module should only have a default export
 var _default = axios;
 exports.default = _default;
-},{"./utils.js":"../../../node_modules/axios/lib/utils.js","./helpers/bind.js":"../../../node_modules/axios/lib/helpers/bind.js","./core/Axios.js":"../../../node_modules/axios/lib/core/Axios.js","./core/mergeConfig.js":"../../../node_modules/axios/lib/core/mergeConfig.js","./defaults/index.js":"../../../node_modules/axios/lib/defaults/index.js","./helpers/formDataToJSON.js":"../../../node_modules/axios/lib/helpers/formDataToJSON.js","./cancel/CanceledError.js":"../../../node_modules/axios/lib/cancel/CanceledError.js","./cancel/CancelToken.js":"../../../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel.js":"../../../node_modules/axios/lib/cancel/isCancel.js","./env/data.js":"../../../node_modules/axios/lib/env/data.js","./helpers/toFormData.js":"../../../node_modules/axios/lib/helpers/toFormData.js","./core/AxiosError.js":"../../../node_modules/axios/lib/core/AxiosError.js","./helpers/spread.js":"../../../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError.js":"../../../node_modules/axios/lib/helpers/isAxiosError.js","./core/AxiosHeaders.js":"../../../node_modules/axios/lib/core/AxiosHeaders.js","./helpers/HttpStatusCode.js":"../../../node_modules/axios/lib/helpers/HttpStatusCode.js"}],"../../../node_modules/axios/index.js":[function(require,module,exports) {
+},{"./utils.js":"../../node_modules/axios/lib/utils.js","./helpers/bind.js":"../../node_modules/axios/lib/helpers/bind.js","./core/Axios.js":"../../node_modules/axios/lib/core/Axios.js","./core/mergeConfig.js":"../../node_modules/axios/lib/core/mergeConfig.js","./defaults/index.js":"../../node_modules/axios/lib/defaults/index.js","./helpers/formDataToJSON.js":"../../node_modules/axios/lib/helpers/formDataToJSON.js","./cancel/CanceledError.js":"../../node_modules/axios/lib/cancel/CanceledError.js","./cancel/CancelToken.js":"../../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel.js":"../../node_modules/axios/lib/cancel/isCancel.js","./env/data.js":"../../node_modules/axios/lib/env/data.js","./helpers/toFormData.js":"../../node_modules/axios/lib/helpers/toFormData.js","./core/AxiosError.js":"../../node_modules/axios/lib/core/AxiosError.js","./helpers/spread.js":"../../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError.js":"../../node_modules/axios/lib/helpers/isAxiosError.js","./core/AxiosHeaders.js":"../../node_modules/axios/lib/core/AxiosHeaders.js","./helpers/HttpStatusCode.js":"../../node_modules/axios/lib/helpers/HttpStatusCode.js"}],"../../node_modules/axios/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11929,7 +11946,7 @@ exports.isCancel = isCancel;
 exports.CanceledError = CanceledError;
 exports.AxiosError = AxiosError;
 exports.Axios = Axios;
-},{"./lib/axios.js":"../../../node_modules/axios/lib/axios.js"}],"alert.js":[function(require,module,exports) {
+},{"./lib/axios.js":"../../node_modules/axios/lib/axios.js"}],"alert.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12037,7 +12054,7 @@ var logout = /*#__PURE__*/function () {
   };
 }();
 exports.logout = logout;
-},{"axios":"../../../node_modules/axios/index.js","./alert":"alert.js"}],"signUp.js":[function(require,module,exports) {
+},{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"signUp.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12094,7 +12111,7 @@ var signUp = /*#__PURE__*/function () {
   };
 }();
 exports.signUp = signUp;
-},{"axios":"../../../node_modules/axios/index.js","./alert":"alert.js"}],"updateSettings.js":[function(require,module,exports) {
+},{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"updateSettings.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12147,7 +12164,7 @@ var updateSettings = /*#__PURE__*/function () {
   };
 }();
 exports.updateSettings = updateSettings;
-},{"axios":"../../../node_modules/axios/index.js","./alert":"alert.js"}],"index.js":[function(require,module,exports) {
+},{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 require("core-js/modules/es6.array.copy-within.js");
@@ -12385,7 +12402,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54047" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51430" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
