@@ -1,0 +1,76 @@
+/**============================================
+   *              FOOTER 
+   *=============================================**/
+
+.footer {
+  background-color: $color-primary-dark;
+  width: 100%;
+
+  &__content {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    & > div:not(:first-child) {
+      margin-left: 10rem;
+    }
+  }
+
+  &__subContent {
+    width: 90%;
+    border-top: 1px solid $color-white;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding: 1rem 0;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    & > a {
+      line-height: 1.2;
+    }
+  }
+
+  &__subLinks {
+    & > a:not(:first-child) {
+      // margin-left: 1rem;
+    }
+  }
+
+  &__img {
+    height: 2.5rem;
+    width: 2.5rem;
+
+    &--container {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    color: $color-white;
+  }
+}
+
+h5 {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1.6rem;
+  color: $color-white;
+}
+
+.link__footer {
+  font-size: 1.5rem;
+  color: $color-white;
+  cursor: pointer;
+}
+.link__footer:hover {
+  text-decoration: underline;
+}
+
+.u__display--inlineBlock {
+  display: inline-block;
+}

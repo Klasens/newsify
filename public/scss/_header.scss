@@ -1,0 +1,142 @@
+/**============================================
+   *              HEADER 
+   *=============================================**/
+
+.header {
+  height: 10rem;
+  background-color: #f9f5f3;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+  }
+  &__right {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    & > *:not(:first-child) {
+      margin-left: 2rem;
+    }
+  }
+  &__center {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+  }
+
+  &__logo {
+    display: block;
+    &--main {
+      height: 6rem;
+      margin-right: 1rem;
+    }
+    &--secondary {
+      height: 2.5rem;
+      margin-right: 0.5rem;
+    }
+    &--login {
+      height: 4.5rem;
+      margin-right: 0.5rem;
+    }
+    &--search {
+      height: 2.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.logo {
+  &__container {
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    text-decoration: none;
+    &--left {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__text {
+    &--main {
+      background: -webkit-linear-gradient(#2df7ce, #414141);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: Bad Script, cursive;
+      font-size: 4rem;
+      font-weight: 700;
+    }
+    &--oneSheet {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: $color-primary;
+    }
+    &--secondary {
+      font-size: 1.5rem;
+      font-style: italic;
+    }
+    &--login {
+      font-size: 2rem;
+      color: $color-black;
+    }
+  }
+}
+
+.search {
+  background-color: #fff;
+  border-radius: 10rem;
+  align-items: center;
+  margin-left: 2rem;
+  padding-left: 3rem;
+  transition: all 0.3s;
+  display: flex;
+  @include respond(break-600) {
+    margin-left: 0;
+    padding-left: 1rem;
+  }
+}
+
+.search:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 0.7rem 3rem #4d454214;
+}
+
+.search__field {
+  color: inherit;
+  width: 30rem;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.7rem;
+}
+
+.search__field:focus {
+  outline: none;
+}
+
+.search__field::placeholder {
+  color: #bbb0ac;
+}
+
+@media only screen and (max-width: 61.25em) {
+  .search__field {
+    width: auto;
+  }
+
+  .search__field::placeholder {
+    color: #fff;
+  }
+}
+
+.search__btn {
+}
+
+.search__icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  fill: currentColor;
+}

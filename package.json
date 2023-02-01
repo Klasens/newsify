@@ -10,7 +10,8 @@
     "watch:js": "parcel watch ./public/index.js --out-dir ./public/js --out-file bundle.js",
     "build:js": "parcel watch ./public/index.js --out-dir ./public/js --out-file bundle.js",
     "start:parcel": "parcel ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
-    "build:parcel": "parcel build index.html"
+    "build:parcel": "parcel build index.html",
+    "compile:sass": "node-sass ./public/scss/main.scss ./public/css/style3.css -w"
   },
   "repository": {
     "type": "git",
@@ -37,8 +38,10 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "node-fetch": "^3.3.0",
+    "node-sass": "^8.0.0",
     "nodemailer": "^6.9.0",
     "pug": "^3.0.2",
+    "sass": "^1.57.1",
     "sharp": "^0.31.3",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"

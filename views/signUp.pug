@@ -3,13 +3,19 @@ extends base
 block content
   .login__container
     .login-form
-      h2 Sign in to your account
-      form.form.form--login
+      h2 Sign up for an account
+      form.form.form--signUp
+        .form__group
+          label.form__label(for='name') First Name 
+          input#name.form__input(type='text', placeholder='Your name here', required)
         .form__group
           label.form__label(for='email') Email Address
           input#email.form__input(type='email', placeholder='you@example.com', required)
         .form__group.ma-bt-md
           label.form__label(for='password') Password
           input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+        .form__group.ma-bt-md
+          label.form__label(for='password') Confirm Password
+          input#passwordConfirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
         .form__btn
           button.btn.btn--green Login

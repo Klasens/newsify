@@ -1,0 +1,29 @@
+/**============================================
+   *              CONTENT 
+   *=============================================**/
+.container {
+  max-width: 120rem;
+  min-height: 117rem;
+  margin: 4vw auto;
+  background-color: $color-primary;
+  border-radius: 9px;
+  overflow: hidden;
+  box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media only screen and (max-width: $bp-large) {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+  @include respond(break-600) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.content {
+  grid-area: content;
+}

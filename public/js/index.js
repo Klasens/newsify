@@ -1,16 +1,31 @@
 /* eslint-disable */
 import '@babel/polyfill';
 import { login, logout } from './login';
+import { signUp } from './signUp';
 import { updateSettings } from './updateSettings';
 
-const form = document.querySelector('.form--login');
+const signUpForm = document.querySelector('.form--signUp');
+const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('#logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const searchBtn = document.querySelector('.search__btn');
 
-if (form)
-  form.addEventListener('submit', (e) => {
+if (signUpForm)
+  signUpForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nameInpt = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const pwInput = document.getElementById('password');
+    const pwConfirmInput = document.getElementById('passwordConfirm');
+    const name = nameInpt.value;
+    const email = emailInput.value;
+    const password = pwInput.value;
+    const passwordConfirm = pwConfirmInput.value;
+    signUp(name, email, password, passwordConfirm);
+  });
+if (loginForm)
+  loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const emailInput = document.getElementById('email');
     const pwInput = document.getElementById('password');

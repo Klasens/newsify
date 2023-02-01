@@ -1,42 +1,46 @@
 header.header
-  div.logo-container
-    img(src="img/newsify.png" alt="Logo" class="header__logo")
-    span.logo-text newsify
-  form.search
-    input(type="text" class="search__field" placeholder="Search over 1,000,000 articles...")
-    button.btn.search__btn
-      svg.search__icon
-        use(href="img/icons.svg#icon-search")
-      span Search
-  nav.nav
-    if user
-      ul.nav__list
-        li.nav__item
-          button.nav__btn.nav__btn--bookmarks
-            span
-              a(href="/me")= 'hello ' + user.name.split(' ')[0] + '!'
-        li.nav__item
-          button.nav__btn.nav__btn--bookmarks#logout
-            span Log Out 
-        li.nav__item
-          button.nav__btn.nav__btn--bookmarks
-            svg.nav__icon
-              use(href="img/icons.svg#icon-bookmark")
-            span Bookmarks
-          div.bookmarks
-            ul.bookmarks__list
-              div.message
-                div
-                  svg
-                    use(href="img/icons.svg#icon-smile")
-                p No bookmarks yet. Find a nice recipe and bookmark it
-    else
-      ul.nav__list
-        li.nav__item
-          button.nav__btn.nav__btn--bookmarks
-            span
-              a(href="/login") Log In 
-        li.nav__item
-          button.nav__btn.nav__btn--bookmarks
-            span
-              a(href="/login") Sign Up 
+  .header__left
+    .logo__container
+      img(src="img/hammer.png" alt="Logo" class="header__logo header__logo--secondary")
+      span.logo__text--secondary Klasen-Development 
+    .logo__container
+      img(src="img/arrow.png" alt="Logo" class="header__logo header__logo--secondary")
+      span.logo__text--oneSheet Newsify One Sheet 
+  a(href="/signUp") 
+    button.btn.btn__header.btn__header--yellow Sign Up
+  .logo__container
+    img(src="img/newsify.png" alt="Logo" class="header__logo header__logo--main")
+    span.logo__text--main newsify
+  button.btn.btn__header.btn__header--search.btn__header--green 
+    img(src="img/search.png" alt="Logo" class="header__logo header__logo--search")
+    p Search 
+  a(class="logo__container" href="/login")  
+      img(src="img/user.png" alt="Logo" class="header__logo header__logo--login")
+      span.logo__text--login Login
+  if user
+    form.search
+      input(type="text" class="search__field" placeholder="Search over 1,000,000 articles...")
+      button.btn.search__btn
+        svg.search__icon
+          use(href="img/icons.svg#icon-search")
+        span Search
+    ul.nav__list
+      li.nav__item
+        button.nav__btn.nav__btn--bookmarks
+          span
+            a(href="/me")= 'hello ' + user.name.split(' ')[0] + '!'
+      li.nav__item
+        button.nav__btn.nav__btn--bookmarks#logout
+          span Log Out 
+      li.nav__item
+        button.nav__btn.nav__btn--bookmarks
+          svg.nav__icon
+            use(href="img/icons.svg#icon-bookmark")
+          span Bookmarks
+        div.bookmarks
+          ul.bookmarks__list
+            div.message
+              div
+                svg
+                  use(href="img/icons.svg#icon-smile")
+              p No bookmarks yet. Find a nice recipe and bookmark it
