@@ -152,6 +152,6 @@
 }
 
 .modal__btn--signUp:hover {
-  border-color: rgb(255, 0, 0);
+  border: 1px dashed $color-green-border;
   transform: translateY(-0.2rem);
 }

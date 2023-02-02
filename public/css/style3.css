@@ -71,7 +71,9 @@ a {
   background-color: #f9f5f3;
   justify-content: space-around;
   align-items: center;
-  display: flex; }
+  display: flex;
+  border-bottom: 1px solid white;
+  box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem #05071f4d; }
   .header__left {
     display: flex;
     flex-direction: column; }
@@ -86,7 +88,8 @@ a {
     justify-content: center;
     width: 30%; }
   .header__logo {
-    display: block; }
+    display: block;
+    border-radius: 50%; }
     .header__logo--main {
       height: 6rem;
       margin-right: 1rem; }
@@ -210,7 +213,8 @@ a {
    *=============================================**/
 .footer {
   background-color: #377c6e;
-  width: 100%; }
+  width: 100%;
+  border-top: 1px solid white; }
   .footer__content {
     margin-top: 1rem;
     display: flex;
@@ -266,6 +270,7 @@ h5 {
   margin: 4vw auto;
   background-color: #1abc9c;
   border-radius: 9px;
+  border: 1px solid white;
   overflow: hidden;
   box-shadow: 0 2rem 6rem 0.5rem rgba(77, 69, 66, 0.2);
   display: flex;
@@ -318,6 +323,7 @@ h5 {
   margin: 4vw auto;
   background-color: #1abc9c;
   border-radius: 9px;
+  border: 1px solid white;
   overflow: hidden;
   box-shadow: 0 2rem 6rem 0.5rem rgba(77, 69, 66, 0.2);
   display: flex;
@@ -425,6 +431,10 @@ h5 {
 
 .btn--green::after {
   background-color: #55c57a; }
+
+.right {
+  display: flex;
+  justify-content: center; }
 
 /**============================================
    *              LOGIN 
@@ -612,5 +622,181 @@ h2 {
   transition: all 0.3s; }
 
 .modal__btn--signUp:hover {
-  border-color: red;
+  border: 1px dashed #00ff15;
   transform: translateY(-0.2rem); }
+
+/**============================================
+   *              BASE 
+   *=============================================**/
+.account__container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: 'sideBar userInfo'; }
+
+#sideBar {
+  grid-area: sideBar; }
+
+#userInfo {
+  grid-area: userInfo; }
+
+.side-nav {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid white; }
+  .side-nav > li:not(:first-child) {
+    margin-top: 1rem; }
+
+.side-nav__header {
+  color: white; }
+
+.side-nav__link {
+  padding-left: 2rem;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  transition: all 0.3s; }
+
+.side-nav__list-item {
+  color: white;
+  display: flex;
+  flex-direction: column; }
+
+.side-nav__link:hover {
+  border-left: 4px solid white; }
+
+.side-nav__link--container {
+  display: flex;
+  flex-direction: column; }
+
+.side-nav__link--parameter {
+  padding-left: 4rem;
+  font-size: 1.5rem; }
+
+.user-view__side-bar {
+  padding: 2rem 0; }
+
+.user-view__content {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white; }
+
+.form__user-photo {
+  height: 7.5rem;
+  border-radius: 50%; }
+
+.form__photo-upload {
+  display: flex; }
+
+.form__upload {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; }
+
+.form__upload--label {
+  color: #1abc9c;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  border-bottom: 1px solid #1abc9c;
+  transition: all 0.2s;
+  cursor: pointer;
+  font-size: 2rem; }
+
+.form__upload--label:hover {
+  background-color: #1abc9c;
+  color: white;
+  border-bottom: 1px solid #ffd849;
+  transform: translateY(-2px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.25); }
+
+.u__display--flexCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2rem; }
+
+.user-view__form-container {
+  width: 40rem;
+  padding: 2rem 0; }
+
+.form__input {
+  color: #747170; }
+
+.side-nav__parameters--grid {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-areas: 'head head' 'lang1 lang2';
+  place-items: center; }
+
+#languages {
+  grid-area: head; }
+
+#languages-col-1 {
+  grid-area: lang1; }
+
+#languages-col-2 {
+  grid-area: lang2; }
+
+#countries {
+  grid-area: head; }
+
+#countries-col-1 {
+  grid-area: lang1; }
+
+#countries-col-2 {
+  grid-area: lang2; }
+
+#dateRange {
+  grid-area: head; }
+
+#dateRange-col-1 {
+  grid-area: lang1; }
+
+.side-nav--mini {
+  padding-bottom: 1rem;
+  color: white;
+  list-style: none; }
+  .side-nav--mini > li:not(:first-child) {
+    margin-top: 1rem; }
+
+.side-nav__parameters--header {
+  color: white;
+  font-size: 2rem;
+  font-weight: 300;
+  text-decoration: underline;
+  margin: 1rem 0; }
+
+.side-nav__list-item--mini {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  border-bottom: none;
+  cursor: pointer; }
+
+.side-nav__list-item--mini:hover {
+  border-bottom: 1px solid white; }
+
+.parameters--container {
+  position: relative; }
+
+#list1 {
+  opacity: 1; }
+
+#list2 {
+  opacity: 0;
+  pointer-events: none; }
+
+#list3 {
+  opacity: 0;
+  pointer-events: none; }

@@ -18,7 +18,7 @@ export const signUp = async (name, email, password, passwordConfirm) => {
     if (res.data.status === 'success') {
       showAlert('success', 'Success! Welcome to Newsify!');
       window.setTimeout(() => {
-        location.assign('/');
+        location.assign('/me');
       }, 1500);
     }
   } catch (err) {

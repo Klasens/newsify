@@ -8,6 +8,8 @@
   justify-content: space-around;
   align-items: center;
   display: flex;
+  border-bottom: 1px solid $color-white;
+  box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem #05071f4d;
 
   &__left {
     display: flex;
@@ -29,6 +31,7 @@
 
   &__logo {
     display: block;
+    border-radius: 50%;
     &--main {
       height: 6rem;
       margin-right: 1rem;

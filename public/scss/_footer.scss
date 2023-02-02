@@ -5,6 +5,7 @@
 .footer {
   background-color: $color-primary-dark;
   width: 100%;
+  border-top: 1px solid $color-white;
 
   &__content {
     margin-top: 1rem;

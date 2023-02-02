@@ -1,0 +1,201 @@
+/**============================================
+   *              BASE 
+   *=============================================**/
+.account__container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: 'sideBar userInfo';
+}
+
+#sideBar {
+  grid-area: sideBar;
+}
+#userInfo {
+  grid-area: userInfo;
+}
+
+.side-nav {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $color-white;
+
+  & > li:not(:first-child) {
+    margin-top: 1rem;
+  }
+}
+
+.side-nav__header {
+  color: $color-white;
+}
+.side-nav__link {
+  padding-left: 2rem;
+  display: flex;
+  align-items: center;
+  color: $color-white;
+  font-size: 2rem;
+  transition: all 0.3s;
+}
+.side-nav__list-item {
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-nav__link:hover {
+  border-left: 4px solid $color-white;
+}
+.side-nav__link--container {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-nav__link--parameter {
+  padding-left: 4rem;
+  font-size: 1.5rem;
+}
+
+.user-view__side-bar {
+  padding: 2rem 0;
+}
+.user-view__content {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $color-white;
+}
+
+.form__user-photo {
+  height: 7.5rem;
+  border-radius: 50%;
+}
+
+.form__photo-upload {
+  display: flex;
+}
+.form__upload {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.form__upload--label {
+  color: $color-primary;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  border-bottom: 1px solid $color-primary;
+  transition: all 0.2s;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.form__upload--label:hover {
+  background-color: $color-primary;
+  color: $color-white;
+  border-bottom: 1px solid $color-gold;
+  transform: translateY(-2px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.25);
+}
+.u__display--flexCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2rem;
+}
+
+.user-view__form-container {
+  width: 40rem;
+  padding: 2rem 0;
+}
+
+.form__input {
+  color: $color-grey;
+}
+
+.side-nav__parameters--grid {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-areas:
+    'head head'
+    'lang1 lang2';
+  place-items: center;
+}
+
+#languages {
+  grid-area: head;
+}
+#languages-col-1 {
+  grid-area: lang1;
+}
+#languages-col-2 {
+  grid-area: lang2;
+}
+#countries {
+  grid-area: head;
+}
+#countries-col-1 {
+  grid-area: lang1;
+}
+#countries-col-2 {
+  grid-area: lang2;
+}
+#dateRange {
+  grid-area: head;
+}
+#dateRange-col-1 {
+  grid-area: lang1;
+}
+
+.side-nav--mini {
+  padding-bottom: 1rem;
+  color: $color-white;
+  list-style: none;
+
+  & > li:not(:first-child) {
+    margin-top: 1rem;
+  }
+}
+
+.side-nav__parameters--header {
+  color: $color-white;
+  font-size: 2rem;
+  font-weight: 300;
+  text-decoration: underline;
+  margin: 1rem 0;
+}
+
+.side-nav__list-item--mini {
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  border-bottom: none;
+  cursor: pointer;
+}
+
+.side-nav__list-item--mini:hover {
+  border-bottom: 1px solid $color-white;
+}
+
+.parameters--container {
+  position: relative;
+}
+
+#list1 {
+  opacity: 1;
+}
+#list2 {
+  opacity: 0;
+  pointer-events: none;
+}
+#list3 {
+  opacity: 0;
+  pointer-events: none;
+}
