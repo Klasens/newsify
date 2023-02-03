@@ -1,0 +1,28 @@
+header.header
+  .logo__container
+    img(src="img/newsify.png" alt="Logo" class="header__logo header__logo--main")
+    span.logo__text--main newsify
+  form.search
+    input(type="text" class="search__field" placeholder="Search over 1,000,000 articles...")
+    button.btn.btn__header.btn__header--search.btn__header--green
+      svg.search__icon
+        use(href="img/icons.svg#icon-search")
+      span Search
+  if user
+  else
+    a(href="/signUp") 
+      button.btn.btn__header.btn__header--yellow Sign Up
+  if user
+    a(href="/") 
+        .logo__container
+          img(src="img/bookmark.png" alt="Logo" class="header__logo header__logo--secondary")
+          span.logo__text--bookmarks Bookmarks 
+    a(class="logo__container" href="/me")  
+        img(src=`/img/users/${user.photo}` alt="Logo" class="header__logo header__logo--login")
+        span.logo__text--login #{user.name.split(' ')[0]}
+    a(class="header__logout" id="logout" href="/login")  
+      span Logout
+  else
+    a(class="logo__container" href="/login")  
+        img(src="img/user.png" alt="Logo" class="header__logo header__logo--login")
+        span.logo__text--login Login

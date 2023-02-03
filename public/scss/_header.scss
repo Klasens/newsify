@@ -3,6 +3,7 @@
    *=============================================**/
 
 .header {
+  position: relative;
   height: 10rem;
   background-color: #f9f5f3;
   justify-content: space-around;
@@ -27,6 +28,13 @@
     display: flex;
     justify-content: center;
     width: 30%;
+  }
+  &__logout {
+    position: absolute;
+    bottom: 0;
+    right: 2rem;
+    font-size: 1.5rem;
+    color: $color-link;
   }
 
   &__logo {
@@ -82,9 +90,17 @@
       font-size: 1.5rem;
       font-style: italic;
     }
+    &--bookmarks {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $color-black;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
     &--login {
       font-size: 2rem;
       color: $color-black;
+      text-transform: capitalize;
     }
   }
 }

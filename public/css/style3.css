@@ -67,6 +67,7 @@ a {
    *              HEADER 
    *=============================================**/
 .header {
+  position: relative;
   height: 10rem;
   background-color: #f9f5f3;
   justify-content: space-around;
@@ -87,6 +88,12 @@ a {
     display: flex;
     justify-content: center;
     width: 30%; }
+  .header__logout {
+    position: absolute;
+    bottom: 0;
+    right: 2rem;
+    font-size: 1.5rem;
+    color: #0084ff; }
   .header__logo {
     display: block;
     border-radius: 50%; }
@@ -130,9 +137,17 @@ a {
   font-size: 1.5rem;
   font-style: italic; }
 
+.logo__text--bookmarks {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1e1e1e;
+  text-transform: uppercase;
+  text-decoration: none; }
+
 .logo__text--login {
   font-size: 2rem;
-  color: #1e1e1e; }
+  color: #1e1e1e;
+  text-transform: capitalize; }
 
 .search {
   background-color: #fff;
@@ -800,3 +815,15 @@ h2 {
 #list3 {
   opacity: 0;
   pointer-events: none; }
+
+.search__container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: 'results article'; }
+
+.results {
+  grid-area: results;
+  background-color: white; }
+
+.results__img {
+  height: 3rem; }

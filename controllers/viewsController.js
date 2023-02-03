@@ -23,6 +23,11 @@ exports.getAccount = (req, res) => {
     title: 'Your Account',
   });
 };
+exports.getSearch = (req, res) => {
+  res.status(200).render('search', {
+    title: 'Search',
+  });
+};
 
 exports.updateUserData = async (req, res, next) => {
   try {
