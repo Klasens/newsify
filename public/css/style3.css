@@ -451,6 +451,122 @@ h5 {
   display: flex;
   justify-content: center; }
 
+.articles {
+  grid-area: article;
+  background-color: white;
+  position: relative; }
+  .articles__img {
+    height: 50rem;
+    position: relative; }
+    .articles__img::before {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(to right bottom, rgba(55, 124, 110, 0.85), rgba(91, 255, 222, 0.85));
+      opacity: 0.6; }
+  .articles__title {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    width: 75%;
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) skewY(-6deg); }
+    .articles__title > span {
+      margin: 0 auto;
+      color: white;
+      font-size: 3.25rem;
+      font-weight: bold;
+      line-height: 1.9;
+      padding: 1.3rem 2rem;
+      background-image: linear-gradient(to right bottom, rgba(55, 124, 110, 0.85), rgba(91, 255, 222, 0.85)); }
+  .articles__subHead {
+    color: #1abc9c;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 1.8rem; }
+  .articles__text {
+    color: #747170;
+    width: 80%;
+    font-size: 1.5rem;
+    padding: 1rem 0; }
+
+.articles__bookmark {
+  padding: 2rem 0;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #1abc9c; }
+
+.articles__description {
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: 1px solid #1abc9c; }
+
+.articles__source {
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: 1px solid #1abc9c; }
+
+.articles__content {
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column; }
+
+.articles__entry {
+  font-size: 1.4rem; }
+
+.articles__entry--container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around; }
+
+.articles__entry--miniContainer {
+  display: flex;
+  align-items: center;
+  position: relative; }
+
+.miniHeader::before {
+  content: 'Date Published:';
+  display: block;
+  position: absolute;
+  top: -2rem;
+  left: 3rem;
+  font-size: 1.4rem;
+  color: #1abc9c; }
+
+.img--article {
+  object-fit: cover;
+  height: 100%;
+  width: 100%; }
+
+.img--bookmark {
+  display: block;
+  border-radius: 50%;
+  height: 3.5rem;
+  margin-right: 0.5rem; }
+
+.img--sourceInfo {
+  display: block;
+  border-radius: 50%;
+  height: 2.5rem;
+  margin-right: 0.5rem; }
+
 /**============================================
    *              LOGIN 
    *=============================================**/
@@ -818,12 +934,55 @@ h2 {
 
 .search__container {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 3fr 7fr;
   grid-template-areas: 'results article'; }
 
 .results {
   grid-area: results;
-  background-color: white; }
+  background-color: #f9f5f3;
+  border-right: 1px solid #1abc9c; }
 
 .results__img {
-  height: 3rem; }
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  margin: 1rem; }
+
+.results__total {
+  font-size: 2.2rem;
+  color: #1abc9c;
+  text-decoration: underline;
+  text-align: center;
+  padding: 1rem 0; }
+
+.results__list-item {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  border-top: 1px solid #5bffde;
+  transition: all 0.2s;
+  cursor: pointer; }
+  .results__list-item:hover {
+    transform: translateY(-2px);
+    border-top: 1px solid #1e1e1e; }
+    .results__list-item:hover + li {
+      border-top: 1px solid #1e1e1e; }
+
+.results__list-item--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
+.results__title {
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  color: #1abc9c;
+  text-overflow: ellipsis;
+  max-width: 25rem;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.results__source {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: #747170; }
