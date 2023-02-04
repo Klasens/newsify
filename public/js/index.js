@@ -9,7 +9,7 @@ const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('#logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
-const searchBtn = document.querySelector('.search__btn');
+const searchBtn = document.querySelector('.btn__header--search');
 
 if (signUpForm)
   signUpForm.addEventListener('submit', (e) => {
@@ -67,4 +67,24 @@ if (userPasswordForm)
 if (searchBtn)
   searchBtn.addEventListener('click', function (e) {
     e.preventDefault();
+    showArticle();
   });
+
+const showArticle = async function () {
+  try {
+    const res = await fetch(
+      'https://gnews.io/api/v4/search?q=biden&token=1f0b1616e135b0f18fb4cb8923c548e8'
+    );
+    const data = await res.json();
+    if (!res.ok) throw new Error(`${data.message}(${res.status})`);
+    console.log(`Here is the response -----`);
+    console.log(res);
+    console.log(`Here is the data ----- `);
+    console.log(data);
+
+    const articlesArray = data.articles;
+    const totalArticles = data.totalArticles;
+  } catch (err) {
+    console.log(error);
+  }
+};
