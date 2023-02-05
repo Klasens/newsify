@@ -12391,7 +12391,9 @@ var showArticle = /*#__PURE__*/function () {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
-          return fetch('https://gnews.io/api/v4/search?q=biden&token=1f0b1616e135b0f18fb4cb8923c548e8');
+          return fetch('https://gnews.io/api/v4/search?q=biden&token=1f0b1616e135b0f18fb4cb8923c548e8', {
+            mode: 'cors'
+          });
         case 3:
           res = _context2.sent;
           _context2.next = 6;
@@ -12424,7 +12426,7 @@ var showArticle = /*#__PURE__*/function () {
           articleContainer.insertAdjacentHTML('afterbegin', html);
           console.log('Html inserted');
           markupPreview = function markupPreview(result) {
-            return "\n        <li class=\"results__list-item\"><img class=\"results__img\" crossorigin=\"anonymous\" src=\"".concat(result.image, "\" alt=\"").concat(result.title, "\"/>\n          <div class=\"results__list-item--container\">\n            <h4 class=\"results__title\">").concat(result.title, "</h4>\n            <span class=\"results__source\">").concat(result.source.name, "</span>\n          </div>\n        </li>\n      ");
+            return "\n        <li class=\"results__list-item\"><img class=\"results__img\" crossorigin=\"anonymous\" src=\"".concat(results.image, "\" alt=\"").concat(result.title, "\"/>\n          <div class=\"results__list-item--container\">\n            <h4 class=\"results__title\">").concat(result.title, "</h4>\n            <span class=\"results__source\">").concat(result.source.name, "</span>\n          </div>\n        </li>\n      ");
           };
           resultsContainer.innerHTML = '';
           resultsContainer.insertAdjacentHTML('afterbegin', articlesArray.map(markupPreview).join(''));
@@ -12469,7 +12471,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52293" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54070" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
