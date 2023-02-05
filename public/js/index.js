@@ -11,6 +11,7 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const searchBtn = document.querySelector('.btn__header--search');
 const articleContainer = document.querySelector('.articles');
+const resultsContainer = document.querySelector('.results__list');
 
 if (signUpForm)
   signUpForm.addEventListener('submit', (e) => {
@@ -82,7 +83,7 @@ const showArticle = async function () {
     const articlesArray = data.articles;
     const totalArticles = data.totalArticles;
     console.log(res);
-    let article = data.articles[6];
+    let article = data.articles[1];
 
     article = {
       title: article.title,
@@ -124,7 +125,23 @@ const showArticle = async function () {
     articleContainer.innerHTML = '';
     articleContainer.insertAdjacentHTML('afterbegin', html);
     console.log('Html inserted');
+
+    const markupPreview = function (result) {
+      return `
+        <li class="results__list-item"><img class="results__img" crossorigin="anonymous" src="${result.image}" alt="${result.title}"/>
+          <div class="results__list-item--container">
+            <h4 class="results__title">${result.title}</h4>
+            <span class="results__source">${result.source.name}</span>
+          </div>
+        </li>
+      `;
+    };
+    resultsContainer.innerHTML = '';
+    resultsContainer.insertAdjacentHTML(
+      'afterbegin',
+      articlesArray.map(markupPreview).join('')
+    );
   } catch (err) {
-    console.log(error);
+    console.log('something went wrong');
   }
 };
