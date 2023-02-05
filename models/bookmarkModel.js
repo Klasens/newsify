@@ -25,12 +25,6 @@ const bookmarkSchema = new mongoose.Schema({
     required: [true, 'Aritlces need to have a URL'],
   },
   image: String,
-  publishedAt: Date,
-  source: Object,
-  bookmarkCreatedAt: {
-    type: Date,
-    default: Date.now(),
-  },
 });
 
 const Bookmark = mongoose.model('Bookmark', bookmarkSchema);

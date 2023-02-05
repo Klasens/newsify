@@ -3,6 +3,7 @@ import '@babel/polyfill';
 import { login, logout } from './login';
 import { signUp } from './signUp';
 import { updateSettings } from './updateSettings';
+import { createBookmark } from './bookmark';
 
 const signUpForm = document.querySelector('.form--signUp');
 const loginForm = document.querySelector('.form--login');
@@ -10,6 +11,7 @@ const logoutBtn = document.querySelector('#logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const searchBtn = document.querySelector('.btn__header--search');
+const bookmarkBtn = document.querySelector('#bookmarkBtn');
 const articleContainer = document.querySelector('.articles');
 const resultsContainer = document.querySelector('.results__list');
 
@@ -71,13 +73,23 @@ if (searchBtn)
     e.preventDefault();
     showArticle();
   });
-
+if (bookmarkBtn)
+  bookmarkBtn.addEventListener('click', function () {
+    console.log('test');
+    const title = 'test';
+    const description = 'test';
+    const content = 'test';
+    const url = 'test1234';
+    const image = 'test';
+    const publishedAt = 'test';
+    const sourceName = 'test';
+    const sourceURL = 'test';
+    createBookmark(title, description, content, url, image);
+  });
 const showArticle = async function () {
   try {
     const res = await fetch(
-      'https://gnews.io/api/v4/search?q=biden&token=1f0b1616e135b0f18fb4cb8923c548e8',
-      { headers: { 'Access-Control-Allow-Origin': '*' } }
-      // { mode: 'no-cors' }
+      'https://gnews.io/api/v4/search?q=biden&token=897bf7a2f1c3629008e07a83dd527b10'
     );
     const data = await res.json();
     if (!res.ok) throw new Error(`${data.message}(${res.status})`);
@@ -101,10 +113,10 @@ const showArticle = async function () {
     console.log(article);
 
     const html = `
-    <figure class="articles__img"><img class="img--article" crossorigin="anonymous" src="${article.image}" alt="${article.title}"/>
+    <figure class="articles__img"><img class="img--article" crossorigin="anonymous" src="img/article.png" alt="${article.title}"/>
     <div class="articles__title"><span>${article.title} 
     </figure>
-        <div class="articles__bookmark"><img class="img--bookmark" src="img/bookmark.png" alt="Logo"/><span class="articles__entry">Bookmark Article</span></div>
+        <div id="bookmarkBtn" class="articles__bookmark"><img class="img--bookmark" src="img/bookmark.png" alt="Logo"/><span class="articles__entry">Bookmark Article</span></div>
         <div class="articles__description">
           <h5 class="articles__subHead">Article Description</h5>
           <p class="articles__text">${article.description} </p>
@@ -130,7 +142,7 @@ const showArticle = async function () {
 
     const markupPreview = function (result) {
       return `
-        <li class="results__list-item"><img class="results__img" crossorigin="anonymous" src="${result.image}" alt="${result.title}"/>
+        <li class="results__list-item"><img class="results__img" crossorigin="anonymous" src="img/preview.png" alt="${result.title}"/>
           <div class="results__list-item--container">
             <h4 class="results__title">${result.title}</h4>
             <span class="results__source">${result.source.name}</span>

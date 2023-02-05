@@ -551,7 +551,7 @@ h5 {
   color: #1abc9c; }
 
 .img--article {
-  object-fit: cover;
+  object-fit: contain;
   height: 100%;
   width: 100%; }
 
