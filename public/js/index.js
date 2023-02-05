@@ -10,6 +10,7 @@ const logoutBtn = document.querySelector('#logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const searchBtn = document.querySelector('.btn__header--search');
+const articleContainer = document.querySelector('.articles');
 
 if (signUpForm)
   signUpForm.addEventListener('submit', (e) => {
@@ -77,13 +78,52 @@ const showArticle = async function () {
     );
     const data = await res.json();
     if (!res.ok) throw new Error(`${data.message}(${res.status})`);
-    console.log(`Here is the response -----`);
-    console.log(res);
-    console.log(`Here is the data ----- `);
-    console.log(data);
 
     const articlesArray = data.articles;
     const totalArticles = data.totalArticles;
+    console.log(res);
+    let article = data.articles[6];
+
+    article = {
+      title: article.title,
+      description: article.description,
+      content: article.content,
+      url: article.url,
+      image: article.image,
+      publishedAt: article.publishedAt,
+      sourceURL: article.source.url,
+      sourceName: article.source.name,
+    };
+
+    console.log(article);
+
+    const html = `
+    <figure class="articles__img"><img class="img--article" crossorigin="anonymous" src="${article.image}" alt="${article.title}"/>
+    <div class="articles__title"><span>${article.title} 
+    </figure>
+        <div class="articles__bookmark"><img class="img--bookmark" src="img/bookmark.png" alt="Logo"/><span class="articles__entry">Bookmark Article</span></div>
+        <div class="articles__description">
+          <h5 class="articles__subHead">Article Description</h5>
+          <p class="articles__text">${article.description} </p>
+        </div>
+        <div class="articles__source">
+          <h5 class="articles__subHead">Source Information</h5>
+          <div class="articles__entry--container">
+            <div class="articles__entry--miniContainer"><img class="img--sourceInfo" src="img/checkmark.png" alt="Logo"/><span class="articles__entry">${article.sourceName}</span></div>
+            <div class="articles__entry--miniContainer"><img class="img--sourceInfo" src="img/checkmark.png" alt="Logo"/><span class="articles__entry">${article.sourceURL}</span></div>
+            <div class="articles__entry--miniContainer miniHeader"><img class="img--sourceInfo" src="img/checkmark.png" alt="Logo"/><span class="articles__entry">${article.publishedAt}</span></div>
+          </div>
+        </div>
+        <div class="articles__content"> 
+          <h5 class="articles__subHead">Article Content</h5>
+          <p class="articles__text">${article.content}</p>
+          <a href="${article.url}"> 
+            <button class="btn btn__header btn__header--green">Go To Site &#8594;  </button></a>
+        </div></span></div>
+    `;
+    articleContainer.innerHTML = '';
+    articleContainer.insertAdjacentHTML('afterbegin', html);
+    console.log('Html inserted');
   } catch (err) {
     console.log(error);
   }
