@@ -76,7 +76,8 @@ const showArticle = async function () {
   try {
     const res = await fetch(
       'https://gnews.io/api/v4/search?q=biden&token=1f0b1616e135b0f18fb4cb8923c548e8',
-      { mode: 'cors' }
+      { headers: { 'Access-Control-Allow-Origin': '*' } }
+      // { mode: 'no-cors' }
     );
     const data = await res.json();
     if (!res.ok) throw new Error(`${data.message}(${res.status})`);
@@ -129,7 +130,7 @@ const showArticle = async function () {
 
     const markupPreview = function (result) {
       return `
-        <li class="results__list-item"><img class="results__img" crossorigin="anonymous" src="${results.image}" alt="${result.title}"/>
+        <li class="results__list-item"><img class="results__img" crossorigin="anonymous" src="${result.image}" alt="${result.title}"/>
           <div class="results__list-item--container">
             <h4 class="results__title">${result.title}</h4>
             <span class="results__source">${result.source.name}</span>
@@ -137,11 +138,14 @@ const showArticle = async function () {
         </li>
       `;
     };
+    console.log(' Second Html generated');
     resultsContainer.innerHTML = '';
+    console.log(' Container cleared');
     resultsContainer.insertAdjacentHTML(
       'afterbegin',
       articlesArray.map(markupPreview).join('')
     );
+    console.log(' Second Html inserted');
   } catch (err) {
     console.log('something went wrong');
   }

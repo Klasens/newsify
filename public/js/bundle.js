@@ -12392,8 +12392,12 @@ var showArticle = /*#__PURE__*/function () {
           _context2.prev = 0;
           _context2.next = 3;
           return fetch('https://gnews.io/api/v4/search?q=biden&token=1f0b1616e135b0f18fb4cb8923c548e8', {
-            mode: 'cors'
-          });
+            headers: {
+              'Access-Control-Allow-Origin': '*'
+            }
+          }
+          // { mode: 'no-cors' }
+          );
         case 3:
           res = _context2.sent;
           _context2.next = 6;
@@ -12426,21 +12430,24 @@ var showArticle = /*#__PURE__*/function () {
           articleContainer.insertAdjacentHTML('afterbegin', html);
           console.log('Html inserted');
           markupPreview = function markupPreview(result) {
-            return "\n        <li class=\"results__list-item\"><img class=\"results__img\" crossorigin=\"anonymous\" src=\"".concat(results.image, "\" alt=\"").concat(result.title, "\"/>\n          <div class=\"results__list-item--container\">\n            <h4 class=\"results__title\">").concat(result.title, "</h4>\n            <span class=\"results__source\">").concat(result.source.name, "</span>\n          </div>\n        </li>\n      ");
+            return "\n        <li class=\"results__list-item\"><img class=\"results__img\" crossorigin=\"anonymous\" src=\"".concat(result.image, "\" alt=\"").concat(result.title, "\"/>\n          <div class=\"results__list-item--container\">\n            <h4 class=\"results__title\">").concat(result.title, "</h4>\n            <span class=\"results__source\">").concat(result.source.name, "</span>\n          </div>\n        </li>\n      ");
           };
+          console.log(' Second Html generated');
           resultsContainer.innerHTML = '';
+          console.log(' Container cleared');
           resultsContainer.insertAdjacentHTML('afterbegin', articlesArray.map(markupPreview).join(''));
-          _context2.next = 27;
+          console.log(' Second Html inserted');
+          _context2.next = 30;
           break;
-        case 24:
-          _context2.prev = 24;
+        case 27:
+          _context2.prev = 27;
           _context2.t0 = _context2["catch"](0);
           console.log('something went wrong');
-        case 27:
+        case 30:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 24]]);
+    }, _callee2, null, [[0, 27]]);
   }));
   return function showArticle() {
     return _ref2.apply(this, arguments);
@@ -12471,7 +12478,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54070" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57187" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
