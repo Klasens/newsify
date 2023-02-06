@@ -7,7 +7,10 @@ export const createBookmark = async (
   description,
   content,
   url,
-  image
+  image,
+  publishedAt,
+  sourceName,
+  sourceURL
 ) => {
   try {
     const res = await axios({
@@ -19,6 +22,9 @@ export const createBookmark = async (
         content,
         url,
         image,
+        publishedAt,
+        sourceName,
+        sourceURL,
       },
     });
 

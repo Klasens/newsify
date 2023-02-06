@@ -12182,7 +12182,7 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var createBookmark = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(title, description, content, url, image) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(title, description, content, url, image, publishedAt, sourceName, sourceURL) {
     var res;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
@@ -12197,7 +12197,10 @@ var createBookmark = /*#__PURE__*/function () {
               description: description,
               content: content,
               url: url,
-              image: image
+              image: image,
+              publishedAt: publishedAt,
+              sourceName: sourceName,
+              sourceURL: sourceURL
             }
           });
         case 3:
@@ -12217,7 +12220,7 @@ var createBookmark = /*#__PURE__*/function () {
       }
     }, _callee, null, [[0, 7]]);
   }));
-  return function createBookmark(_x, _x2, _x3, _x4, _x5) {
+  return function createBookmark(_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -12371,9 +12374,9 @@ var logoutBtn = document.querySelector('#logout');
 var userDataForm = document.querySelector('.form-user-data');
 var userPasswordForm = document.querySelector('.form-user-password');
 var searchBtn = document.querySelector('.btn__header--search');
-var bookmarkBtn = document.querySelector('#bookmarkBtn');
 var articleContainer = document.querySelector('.articles');
 var resultsContainer = document.querySelector('.results__list');
+var inputField = document.querySelector('#query');
 if (signUpForm) signUpForm.addEventListener('submit', function (e) {
   e.preventDefault();
   var nameInpt = document.getElementById('name');
@@ -12438,29 +12441,55 @@ if (userPasswordForm) userPasswordForm.addEventListener('submit', /*#__PURE__*/f
 }());
 if (searchBtn) searchBtn.addEventListener('click', function (e) {
   e.preventDefault();
-  showArticle();
+  var query = inputField.value;
+  getArticles(query);
 });
-if (bookmarkBtn) bookmarkBtn.addEventListener('click', function () {
-  console.log('test');
-  var title = 'test';
-  var description = 'test';
-  var content = 'test';
-  var url = 'test1234';
-  var image = 'test';
-  var publishedAt = 'test';
-  var sourceName = 'test';
-  var sourceURL = 'test';
-  (0, _bookmark.createBookmark)(title, description, content, url, image);
-});
-var showArticle = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var res, data, articlesArray, totalArticles, article, html, markupPreview;
+var state = {
+  articlesArray: []
+};
+var createBookmarkSelector = function createBookmarkSelector(article) {
+  var bookmarkBtn = document.querySelector('#bookmarkBtn');
+  bookmarkBtn.addEventListener('click', function () {
+    console.log('test');
+    var title = article.title;
+    var description = article.description;
+    var content = article.content;
+    var url = article.url;
+    var image = article.image;
+    var publishedAt = article.publishedAt;
+    var sourceName = article.sourceName;
+    var sourceURL = article.sourceURL;
+    (0, _bookmark.createBookmark)(title, description, content, url, image, publishedAt, sourceName, sourceURL);
+  });
+};
+var displayArticle = function displayArticle() {
+  var id = window.location.hash.slice(1);
+  console.log(id);
+  var article = state.articlesArray[id];
+  article = {
+    title: article.title,
+    description: article.description,
+    content: article.content,
+    url: article.url,
+    image: article.image,
+    publishedAt: article.publishedAt,
+    sourceURL: article.source.url,
+    sourceName: article.source.name
+  };
+  var html = "\n    <figure class=\"articles__img\"><img class=\"img--article\" crossorigin=\"anonymous\" src=\"img/article.png\" alt=\"".concat(article.title, "\"/>\n    <div class=\"articles__title\"><span>").concat(article.title, " \n    </figure>\n        <div id=\"bookmarkBtn\" class=\"articles__bookmark\"><img class=\"img--bookmark\" src=\"img/bookmark.png\" alt=\"Logo\"/><span class=\"articles__entry\">Bookmark Article</span></div>\n        <div class=\"articles__description\">\n          <h5 class=\"articles__subHead\">Article Description</h5>\n          <p class=\"articles__text\">").concat(article.description, " </p>\n        </div>\n        <div class=\"articles__source\">\n          <h5 class=\"articles__subHead\">Source Information</h5>\n          <div class=\"articles__entry--container\">\n            <div class=\"articles__entry--miniContainer\"><img class=\"img--sourceInfo\" src=\"img/checkmark.png\" alt=\"Logo\"/><span class=\"articles__entry\">").concat(article.sourceName, "</span></div>\n            <div class=\"articles__entry--miniContainer\"><img class=\"img--sourceInfo\" src=\"img/checkmark.png\" alt=\"Logo\"/><span class=\"articles__entry\">").concat(article.sourceURL, "</span></div>\n            <div class=\"articles__entry--miniContainer miniHeader\"><img class=\"img--sourceInfo\" src=\"img/checkmark.png\" alt=\"Logo\"/><span class=\"articles__entry\">").concat(article.publishedAt, "</span></div>\n          </div>\n        </div>\n        <div class=\"articles__content\"> \n          <h5 class=\"articles__subHead\">Article Content</h5>\n          <p class=\"articles__text\">").concat(article.content, "</p>\n          <a href=\"").concat(article.url, "\"> \n            <button class=\"btn btn__header btn__header--green\">Go To Site &#8594;  </button></a>\n        </div></span></div>\n    ");
+  articleContainer.innerHTML = '';
+  articleContainer.insertAdjacentHTML('afterbegin', html);
+  createBookmarkSelector(article);
+};
+var getArticles = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(query) {
+    var res, data, totalArticles, markupPreview;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
-          return fetch('https://gnews.io/api/v4/search?q=biden&token=897bf7a2f1c3629008e07a83dd527b10');
+          return fetch("https://gnews.io/api/v4/search?q=".concat(query, "&token=897bf7a2f1c3629008e07a83dd527b10"));
         case 3:
           res = _context2.sent;
           _context2.next = 6;
@@ -12473,46 +12502,74 @@ var showArticle = /*#__PURE__*/function () {
           }
           throw new Error("".concat(data.message, "(").concat(res.status, ")"));
         case 9:
-          articlesArray = data.articles;
+          state.articlesArray = data.articles;
           totalArticles = data.totalArticles;
-          console.log(res);
-          article = data.articles[1];
-          article = {
-            title: article.title,
-            description: article.description,
-            content: article.content,
-            url: article.url,
-            image: article.image,
-            publishedAt: article.publishedAt,
-            sourceURL: article.source.url,
-            sourceName: article.source.name
-          };
-          console.log(article);
-          html = "\n    <figure class=\"articles__img\"><img class=\"img--article\" crossorigin=\"anonymous\" src=\"img/article.png\" alt=\"".concat(article.title, "\"/>\n    <div class=\"articles__title\"><span>").concat(article.title, " \n    </figure>\n        <div id=\"bookmarkBtn\" class=\"articles__bookmark\"><img class=\"img--bookmark\" src=\"img/bookmark.png\" alt=\"Logo\"/><span class=\"articles__entry\">Bookmark Article</span></div>\n        <div class=\"articles__description\">\n          <h5 class=\"articles__subHead\">Article Description</h5>\n          <p class=\"articles__text\">").concat(article.description, " </p>\n        </div>\n        <div class=\"articles__source\">\n          <h5 class=\"articles__subHead\">Source Information</h5>\n          <div class=\"articles__entry--container\">\n            <div class=\"articles__entry--miniContainer\"><img class=\"img--sourceInfo\" src=\"img/checkmark.png\" alt=\"Logo\"/><span class=\"articles__entry\">").concat(article.sourceName, "</span></div>\n            <div class=\"articles__entry--miniContainer\"><img class=\"img--sourceInfo\" src=\"img/checkmark.png\" alt=\"Logo\"/><span class=\"articles__entry\">").concat(article.sourceURL, "</span></div>\n            <div class=\"articles__entry--miniContainer miniHeader\"><img class=\"img--sourceInfo\" src=\"img/checkmark.png\" alt=\"Logo\"/><span class=\"articles__entry\">").concat(article.publishedAt, "</span></div>\n          </div>\n        </div>\n        <div class=\"articles__content\"> \n          <h5 class=\"articles__subHead\">Article Content</h5>\n          <p class=\"articles__text\">").concat(article.content, "</p>\n          <a href=\"").concat(article.url, "\"> \n            <button class=\"btn btn__header btn__header--green\">Go To Site &#8594;  </button></a>\n        </div></span></div>\n    ");
-          articleContainer.innerHTML = '';
-          articleContainer.insertAdjacentHTML('afterbegin', html);
+          ['hashchange', 'load'].forEach(function (ev) {
+            return window.addEventListener(ev, displayArticle);
+          });
+          // let article = data.articles[1];
+
+          // article = {
+          //   title: article.title,
+          //   description: article.description,
+          //   content: article.content,
+          //   url: article.url,
+          //   image: article.image,
+          //   publishedAt: article.publishedAt,
+          //   sourceURL: article.source.url,
+          //   sourceName: article.source.name,
+          // };
+
+          // console.log(article);
+
+          // const html = `
+          // <figure class="articles__img"><img class="img--article" crossorigin="anonymous" src="img/article.png" alt="${article.title}"/>
+          // <div class="articles__title"><span>${article.title}
+          // </figure>
+          //     <div id="bookmarkBtn" class="articles__bookmark"><img class="img--bookmark" src="img/bookmark.png" alt="Logo"/><span class="articles__entry">Bookmark Article</span></div>
+          //     <div class="articles__description">
+          //       <h5 class="articles__subHead">Article Description</h5>
+          //       <p class="articles__text">${article.description} </p>
+          //     </div>
+          //     <div class="articles__source">
+          //       <h5 class="articles__subHead">Source Information</h5>
+          //       <div class="articles__entry--container">
+          //         <div class="articles__entry--miniContainer"><img class="img--sourceInfo" src="img/checkmark.png" alt="Logo"/><span class="articles__entry">${article.sourceName}</span></div>
+          //         <div class="articles__entry--miniContainer"><img class="img--sourceInfo" src="img/checkmark.png" alt="Logo"/><span class="articles__entry">${article.sourceURL}</span></div>
+          //         <div class="articles__entry--miniContainer miniHeader"><img class="img--sourceInfo" src="img/checkmark.png" alt="Logo"/><span class="articles__entry">${article.publishedAt}</span></div>
+          //       </div>
+          //     </div>
+          //     <div class="articles__content">
+          //       <h5 class="articles__subHead">Article Content</h5>
+          //       <p class="articles__text">${article.content}</p>
+          //       <a href="${article.url}">
+          //         <button class="btn btn__header btn__header--green">Go To Site &#8594;  </button></a>
+          //     </div></span></div>
+          // `;
+          // articleContainer.innerHTML = '';
+          // articleContainer.insertAdjacentHTML('afterbegin', html);
           console.log('Html inserted');
-          markupPreview = function markupPreview(result) {
-            return "\n        <li class=\"results__list-item\"><img class=\"results__img\" crossorigin=\"anonymous\" src=\"img/preview.png\" alt=\"".concat(result.title, "\"/>\n          <div class=\"results__list-item--container\">\n            <h4 class=\"results__title\">").concat(result.title, "</h4>\n            <span class=\"results__source\">").concat(result.source.name, "</span>\n          </div>\n        </li>\n      ");
+          markupPreview = function markupPreview(result, index) {
+            return "\n      <a href=\"#".concat(index, "\">\n        <li class=\"results__list-item\"><img class=\"results__img\" crossorigin=\"anonymous\" src=\"img/preview.png\" alt=\"").concat(result.title, "\"/>\n          <div class=\"results__list-item--container\">\n            <h4 class=\"results__title\">").concat(result.title, "</h4>\n            <span class=\"results__source\">").concat(result.source.name, "</span>\n          </div>\n        </li>\n      </a>\n      ");
           };
           console.log(' Second Html generated');
           resultsContainer.innerHTML = '';
           console.log(' Container cleared');
-          resultsContainer.insertAdjacentHTML('afterbegin', articlesArray.map(markupPreview).join(''));
+          resultsContainer.insertAdjacentHTML('afterbegin', state.articlesArray.map(markupPreview).join(''));
           console.log(' Second Html inserted');
-          _context2.next = 30;
+          _context2.next = 24;
           break;
-        case 27:
-          _context2.prev = 27;
+        case 21:
+          _context2.prev = 21;
           _context2.t0 = _context2["catch"](0);
-          console.log('something went wrong');
-        case 30:
+          console.log(_context2.t0);
+        case 24:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 27]]);
+    }, _callee2, null, [[0, 21]]);
   }));
-  return function showArticle() {
+  return function getArticles(_x2) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -12541,7 +12598,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57187" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63357" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
