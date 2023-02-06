@@ -118,7 +118,7 @@ const displayArticle = function () {
     sourceName: article.source.name,
   };
   const html = `
-    <figure class="articles__img"><img class="img--article" crossorigin="anonymous" src="img/article.png" alt="${article.title}"/>
+    <figure class="articles__img"><img class="img--article" crossorigin="anonymous" src="${article.image}" alt="${article.title}"/>
     <div class="articles__title"><span>${article.title} 
     </figure>
         <div id="bookmarkBtn" class="articles__bookmark"><img class="img--bookmark" src="img/bookmark.png" alt="Logo"/><span class="articles__entry">Bookmark Article</span></div>
@@ -204,7 +204,7 @@ const getArticles = async function (query) {
     const markupPreview = function (result, index) {
       return `
       <a href="#${index}">
-        <li class="results__list-item"><img class="results__img" crossorigin="anonymous" src="img/preview.png" alt="${result.title}"/>
+        <li class="results__list-item"><img class="results__img" crossorigin="anonymous" src="${result.image}" alt="${result.title}"/>
           <div class="results__list-item--container">
             <h4 class="results__title">${result.title}</h4>
             <span class="results__source">${result.source.name}</span>

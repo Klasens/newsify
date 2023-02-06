@@ -19,6 +19,13 @@ const viewRouter = require('./routes/viewRoutes');
 
 //* Initializing express
 const app = express();
+// const corsOptions = {
+//   origin: 'http://localhost:3000',
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+//   methods: 'GET, POST',
+// };
+app.use(cors());
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -39,7 +46,7 @@ app.set('views', path.join(__dirname, 'views'));
 //   );
 //   next();
 // });
-app.use(cors({ origin: 'http://127.0.0.1:3000' }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 //  Set Security Headers  //
 app.use(
