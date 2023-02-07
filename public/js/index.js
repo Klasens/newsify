@@ -192,7 +192,6 @@ const getArticles = async function (query) {
       'beforeend',
       state.articlesArray.map(markupPreview).join('')
     );
-    articleContainer.innerHTML = '';
     console.log(' Second Html inserted');
   } catch (err) {
     console.log(err);
@@ -255,7 +254,6 @@ const getTopHeadlines = async function (id) {
       'beforeend',
       state.articlesArray.map(markupPreview).join('')
     );
-    articleContainer.innerHTML = '';
     console.log(' Second Html inserted');
   } catch (err) {
     console.log(err);

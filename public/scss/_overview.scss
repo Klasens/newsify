@@ -1,14 +1,12 @@
-.modal__container {
-  border: 1px solid #fff;
-  color: #fff;
-  background-color: #1abc9c;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem 0;
-  transition: all 0.5s;
+.oneSheet__description {
+  padding: 2rem 0;
   display: flex;
-  overflow: hidden;
-  box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem #05071f4d;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: 1px solid $color-primary;
+  background-color: $color-primary;
+  color: $color-white;
+  height: 100%;
 }
 
 @media (max-width: 53.125em) {
@@ -43,7 +41,7 @@
 }
 
 .modal__title--h1 {
-  border-bottom: 3px solid #fff;
+  border-bottom: 3px solid $color-white;
 }
 
 .modal__title--h3 {
@@ -82,7 +80,7 @@
 }
 
 .modal__text {
-  width: 45%;
+  width: 75%;
   padding: 1rem 0;
   font-size: 1.7rem;
 }
@@ -94,8 +92,8 @@
 }
 
 .modal__headers--container {
-  width: 65%;
-  border-top: 2px solid #fff;
+  width: 95%;
+  border-top: 2px solid $color-white;
   display: grid;
   // grid-template-columns: 1fr 1fr;
   // grid-template-rows: 1fr 1fr;
@@ -154,4 +152,9 @@
 .modal__btn--signUp:hover {
   border: 1px dashed $color-green-border;
   transform: translateY(-0.2rem);
+}
+
+.border-line {
+  color: $color-primary;
+  font-size: 3rem;
 }

@@ -3,7 +3,7 @@ extends base_2
 block content
   .account__container
     #sideBar.user-view__side-bar
-      h2.side-nav__header Roger Klasen
+      h2.side-nav__header #{user.name} 
       nav.user-view__menu
         ul.side-nav
           li.side-nav__list-item.side-nav--active
@@ -13,11 +13,13 @@ block content
           li.side-nav__list-item
             a(href='#' class="side-nav__link")
               img(src="img/bookmark-white.png" alt="Logo" class="header__logo header__logo--search")
-              | Bookmarks 
+              | Bookmarks
+              span.coming-soon.margin-left (In-Development)
           li.side-nav__list-item
-            a(href='#' class="side-nav__link")
+            a(href='#' class="side-nav__link search-parameters")
               img(src="img/search.png" alt="Logo" class="header__logo header__logo--search")
-              | Search Parameters
+              | Search Parameters 
+            span.coming-soon (In-Development)
             div.side-nav__link--container
               span.side-nav__link--parameter Language - English
               span.side-nav__link--parameter Country - United States 

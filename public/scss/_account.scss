@@ -33,6 +33,7 @@
   color: $color-white;
   font-size: 2rem;
   transition: all 0.3s;
+  position: relative;
 }
 .side-nav__list-item {
   color: $color-white;
@@ -49,8 +50,12 @@
 }
 
 .side-nav__link--parameter {
+  cursor: pointer;
   padding-left: 4rem;
   font-size: 1.5rem;
+}
+.side-nav__link--parameter:hover {
+  border-left: 2px solid $color-white;
 }
 
 .user-view__side-bar {
@@ -198,4 +203,12 @@
 #list3 {
   opacity: 0;
   pointer-events: none;
+}
+
+.coming-soon {
+  font-size: 1.5rem;
+  text-align: center;
+}
+.margin-left {
+  margin-left: 1rem;
 }
