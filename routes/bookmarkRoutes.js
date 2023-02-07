@@ -15,7 +15,7 @@ const router = express.Router();
 router
   .route('/')
   .get(authController.protect, bookmarkController.getAllBookmarks)
-  .post(authController.isLoggedIn, bookmarkController.addBookmark);
+  .post(authController.protect, bookmarkController.addBookmark);
 router
   .route('/:id')
   .get(bookmarkController.getBookmark)

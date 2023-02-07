@@ -516,9 +516,11 @@ h5 {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #1abc9c; }
+  border-bottom: 1px solid #1abc9c;
+  cursor: pointer; }
 
 .articles__description {
+  cursor: pointer;
   padding: 2rem 0;
   display: flex;
   align-items: center;

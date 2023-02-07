@@ -5,8 +5,16 @@ import { signUp } from './signUp';
 import { updateSettings } from './updateSettings';
 import { createBookmark } from './bookmark';
 
+// TOP HEADLINES SELECTORS
 const generalHeadlines = document.getElementById('general');
 const worldHeadlines = document.getElementById('world');
+const nationHeadlines = document.getElementById('nation');
+const businessHeadlines = document.getElementById('business');
+const technologyHeadlines = document.getElementById('technology');
+const entertainmentHeadlines = document.getElementById('entertainment');
+const sportsHeadlines = document.getElementById('sports');
+const scienceHeadlines = document.getElementById('science');
+const healthHeadlines = document.getElementById('health');
 
 const signUpForm = document.querySelector('.form--signUp');
 const loginForm = document.querySelector('.form--login');
@@ -205,6 +213,34 @@ if (generalHeadlines)
 if (worldHeadlines)
   worldHeadlines.addEventListener('click', function () {
     getTopHeadlines('world');
+  });
+if (nationHeadlines)
+  nationHeadlines.addEventListener('click', function () {
+    getTopHeadlines('nation');
+  });
+if (businessHeadlines)
+  businessHeadlines.addEventListener('click', function () {
+    getTopHeadlines('business');
+  });
+if (technologyHeadlines)
+  technologyHeadlines.addEventListener('click', function () {
+    getTopHeadlines('technology');
+  });
+if (entertainmentHeadlines)
+  entertainmentHeadlines.addEventListener('click', function () {
+    getTopHeadlines('entertainment');
+  });
+if (sportsHeadlines)
+  sportsHeadlines.addEventListener('click', function () {
+    getTopHeadlines('sports');
+  });
+if (scienceHeadlines)
+  scienceHeadlines.addEventListener('click', function () {
+    getTopHeadlines('science');
+  });
+if (healthHeadlines)
+  healthHeadlines.addEventListener('click', function () {
+    getTopHeadlines('health');
   });
 
 const getTopHeadlines = async function (id) {
