@@ -61,8 +61,20 @@
   white-space: nowrap;
 }
 
+.results__title--topHeadline {
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  color: $color-black;
+  max-width: 25rem;
+}
+
 .results__source {
   font-size: 1.3rem;
   text-transform: uppercase;
   color: $color-grey;
+}
+.results__category {
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: $color-primary-dark;
 }

@@ -14,16 +14,19 @@ header.header
   else
     a(href="/signUp") 
       button.btn.btn__header.btn__header--yellow Sign Up
-  .logo__container
-    img(src="img/newsify.png" alt="Logo" class="header__logo header__logo--main")
-    span.logo__text--main newsify
+  a(href="/") 
+    .logo__container
+      img(src="img/newsify.png" alt="Logo" class="header__logo header__logo--main")
+      span.logo__text--main newsify
   button.btn.btn__header.btn__header--search.btn__header--green 
     img(src="img/search.png" alt="Logo" class="header__logo header__logo--search")
     p Search 
   if user
-    a(class="logo__container" id="logout" href="/login")  
+    a(class="logo__container" href="/me")  
         img(src=`/img/users/${user.photo}` alt="Logo" class="header__logo header__logo--login")
-        span.logo__text--login Logout
+        span.logo__text--login #{user.name.split(' ')[0]}
+    a(class="header__logout" id="logout" href="/login")  
+      span Logout
   else
     a(class="logo__container" href="/login")  
         img(src="img/user.png" alt="Logo" class="header__logo header__logo--login")

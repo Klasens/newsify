@@ -491,10 +491,20 @@ h5 {
     font-weight: bold;
     margin-bottom: 1rem;
     font-size: 1.8rem; }
+  .articles__subHead-pre {
+    color: #1abc9c;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 2.2rem; }
   .articles__text {
     color: #747170;
     width: 80%;
     font-size: 1.5rem;
+    padding: 1rem 0; }
+  .articles__text-pre {
+    color: #747170;
+    width: 80%;
+    font-size: 2rem;
     padding: 1rem 0; }
 
 .articles__bookmark {
@@ -551,7 +561,7 @@ h5 {
   color: #1abc9c; }
 
 .img--article {
-  object-fit: contain;
+  object-fit: cover;
   height: 100%;
   width: 100%; }
 
@@ -566,6 +576,13 @@ h5 {
   border-radius: 50%;
   height: 2.5rem;
   margin-right: 0.5rem; }
+
+.articles__description-pre {
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: 1px solid #1abc9c; }
 
 /**============================================
    *              LOGIN 
@@ -982,7 +999,18 @@ h2 {
   overflow: hidden;
   white-space: nowrap; }
 
+.results__title--topHeadline {
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  color: #1e1e1e;
+  max-width: 25rem; }
+
 .results__source {
   font-size: 1.3rem;
   text-transform: uppercase;
   color: #747170; }
+
+.results__category {
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #377c6e; }
