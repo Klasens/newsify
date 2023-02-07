@@ -54,7 +54,7 @@
   display: flex;
   padding: 1rem;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-top: 1px solid $color-primary-light;
   transition: all 0.2s;
   cursor: pointer;
@@ -89,6 +89,8 @@
   text-transform: uppercase;
   color: $color-black;
   max-width: 25rem;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .results__source {
@@ -100,4 +102,10 @@
   font-size: 2rem;
   text-transform: uppercase;
   color: $color-primary-dark;
+}
+
+.border-line {
+  border-top: 1px solid $color-primary;
+  height: 1px;
+  width: 5rem;
 }

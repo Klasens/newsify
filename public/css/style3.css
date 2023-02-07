@@ -771,10 +771,6 @@ h2 {
   border: 1px dashed #00ff15;
   transform: translateY(-0.2rem); }
 
-.border-line {
-  color: #1abc9c;
-  font-size: 3rem; }
-
 /**============================================
    *              BASE 
    *=============================================**/
@@ -1008,7 +1004,7 @@ h2 {
   display: flex;
   padding: 1rem;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-top: 1px solid #5bffde;
   transition: all 0.2s;
   cursor: pointer; }
@@ -1036,7 +1032,9 @@ h2 {
   font-size: 1.7rem;
   text-transform: uppercase;
   color: #1e1e1e;
-  max-width: 25rem; }
+  max-width: 25rem;
+  overflow: hidden;
+  white-space: nowrap; }
 
 .results__source {
   font-size: 1.3rem;
@@ -1047,3 +1045,8 @@ h2 {
   font-size: 2rem;
   text-transform: uppercase;
   color: #377c6e; }
+
+.border-line {
+  border-top: 1px solid #1abc9c;
+  height: 1px;
+  width: 5rem; }
