@@ -5,6 +5,22 @@ import { signUp } from './signUp';
 import { updateSettings } from './updateSettings';
 import { createBookmark } from './bookmark';
 
+// MOBILE SELECTORS
+const open = document.getElementById('open');
+const close = document.getElementById('close');
+const mobileNav = document.querySelector('.mobile-nav');
+
+if (open)
+  open.addEventListener('click', function () {
+    mobileNav.classList.add('fadeIn');
+    mobileNav.classList.remove('pointer-events-none');
+  });
+if (close)
+  close.addEventListener('click', function () {
+    mobileNav.classList.remove('fadeIn');
+    mobileNav.classList.add('pointer-events-none');
+  });
+
 // MORE INFO SELECTORS
 const moreInfo = document.querySelector('.more-info');
 const moreInfoHeader = document.querySelectorAll('.modal__list--container');

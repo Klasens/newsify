@@ -1,0 +1,60 @@
+.mobile-nav {
+  opacity: 0;
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  background-color: $color-off-white;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  @include respond(break-600) {
+    display: block;
+  }
+}
+
+.mobile-nav__header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px $color-black;
+  padding: 1rem;
+}
+
+.mobile-nav__mainHead {
+  font-size: 5rem;
+  font-weight: 300;
+  color: $color-primary;
+  text-decoration: underline;
+}
+
+.mobile-nav__link {
+  font-size: 4rem;
+  color: $color-black;
+}
+
+.mobile-nav__logo {
+  display: flex;
+  align-items: center;
+  &--text {
+    font-size: 2.5rem;
+    margin-left: 0.5rem;
+  }
+}
+
+.mobile-nav__menu {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-nav__icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  &--logo {
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+}

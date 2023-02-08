@@ -421,7 +421,42 @@ a {
     display: flex;
     justify-content: center; }
     .footer__content > div:not(:first-child) {
-      margin-left: 10rem; }
+      margin-left: 10rem;
+      /**============================================
+   *             Mobile Small - 600
+@include respond(break-600) {}
+   *=============================================**/
+      /**============================================
+   *             Mobile Large - 850
+@include respond(break-850) {}
+   *=============================================**/
+      /**============================================
+   *                Tablet - 1000
+@include respond(break-1000) {}
+   *=============================================**/
+      /**============================================
+   *                Monitor Small - 1200
+   @include respond(break-1250) {}
+   *=============================================**/
+      /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1400) {}
+   *=============================================**/
+      /**============================================
+   *                Larger than - 1600
+   @include respond(break-greater-1600) {}
+   *=============================================**/
+      /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1600) {}
+   *=============================================**/
+      /**============================================
+   *                Telvision/Projector > 1800
+   @include respond(break-1800) {}
+   *=============================================**/ }
+      @media (max-width: 37.5em) {
+        .footer__content > div:not(:first-child) {
+          margin-left: 1rem; } }
   .footer__subContent {
     width: 90%;
     border-top: 1px solid white;
@@ -771,6 +806,90 @@ h5 {
   align-items: center;
   flex-direction: column;
   border-bottom: 1px solid #1abc9c; }
+
+.mobile-nav {
+  opacity: 0;
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  background-color: #f9f5f3;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  /**============================================
+   *             Mobile Small - 600
+@include respond(break-600) {}
+   *=============================================**/
+  /**============================================
+   *             Mobile Large - 850
+@include respond(break-850) {}
+   *=============================================**/
+  /**============================================
+   *                Tablet - 1000
+@include respond(break-1000) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Small - 1200
+   @include respond(break-1250) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1400) {}
+   *=============================================**/
+  /**============================================
+   *                Larger than - 1600
+   @include respond(break-greater-1600) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1600) {}
+   *=============================================**/
+  /**============================================
+   *                Telvision/Projector > 1800
+   @include respond(break-1800) {}
+   *=============================================**/ }
+  @media (max-width: 37.5em) {
+    .mobile-nav {
+      display: block; } }
+
+.mobile-nav__header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px #1e1e1e;
+  padding: 1rem; }
+
+.mobile-nav__mainHead {
+  font-size: 5rem;
+  font-weight: 300;
+  color: #1abc9c;
+  text-decoration: underline; }
+
+.mobile-nav__link {
+  font-size: 4rem;
+  color: #1e1e1e; }
+
+.mobile-nav__logo {
+  display: flex;
+  align-items: center; }
+  .mobile-nav__logo--text {
+    font-size: 2.5rem;
+    margin-left: 0.5rem; }
+
+.mobile-nav__menu {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.mobile-nav__icon {
+  width: 3.25rem;
+  height: 3.25rem; }
+  .mobile-nav__icon--logo {
+    width: 4.25rem;
+    height: 4.25rem; }
 
 /**========================================================================
  *                           TOC - LANDING MODAL 
@@ -1215,7 +1334,43 @@ h2 {
 .login__container {
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  /**============================================
+   *             Mobile Small - 600
+@include respond(break-600) {}
+   *=============================================**/
+  /**============================================
+   *             Mobile Large - 850
+@include respond(break-850) {}
+   *=============================================**/
+  /**============================================
+   *                Tablet - 1000
+@include respond(break-1000) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Small - 1200
+   @include respond(break-1250) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1400) {}
+   *=============================================**/
+  /**============================================
+   *                Larger than - 1600
+   @include respond(break-greater-1600) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1600) {}
+   *=============================================**/
+  /**============================================
+   *                Telvision/Projector > 1800
+   @include respond(break-1800) {}
+   *=============================================**/ }
+  @media (max-width: 37.5em) {
+    .login__container {
+      width: 95%;
+      margin: 0 auto; } }
 
 .login-form {
   margin: 0 auto;
@@ -1225,7 +1380,43 @@ h2 {
   background-color: #fff;
   -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
   box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
-  border-radius: 10px; }
+  border-radius: 10px;
+  /**============================================
+   *             Mobile Small - 600
+@include respond(break-600) {}
+   *=============================================**/
+  /**============================================
+   *             Mobile Large - 850
+@include respond(break-850) {}
+   *=============================================**/
+  /**============================================
+   *                Tablet - 1000
+@include respond(break-1000) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Small - 1200
+   @include respond(break-1250) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1400) {}
+   *=============================================**/
+  /**============================================
+   *                Larger than - 1600
+   @include respond(break-greater-1600) {}
+   *=============================================**/
+  /**============================================
+   *                Monitor Medium - 1400
+   @include respond(break-1600) {}
+   *=============================================**/
+  /**============================================
+   *                Telvision/Projector > 1800
+   @include respond(break-1800) {}
+   *=============================================**/ }
+  @media (max-width: 37.5em) {
+    .login-form {
+      width: 100%;
+      padding: 1rem; } }
 
 .form__input {
   display: block;
