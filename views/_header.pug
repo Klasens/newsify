@@ -1,14 +1,15 @@
 header.header
   .header__left
+    img(src="img/hamburger.png" alt="Logo" class="header__menu--mobile")
     a(target="_blank" href="https://klasen-development.com") 
       .logo__container
         img(src="img/hammer.png" alt="Logo" class="header__logo header__logo--secondary")
         span.logo__text--secondary Klasen-Development 
   a(href="/") 
-    .logo__container
+    .logo__container#mobile-show
       img(src="img/newsify.png" alt="Logo" class="header__logo header__logo--main")
       span.logo__text--main newsify
-  button.btn.btn__header.btn__header--search.btn__header--green 
+  button.btn.btn__header.btn__header--search.btn__header--green#mobile-hide 
     img(src="img/search.png" alt="Logo" class="header__logo header__logo--search")
     p Search 
   if user

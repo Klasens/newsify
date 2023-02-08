@@ -72,6 +72,7 @@
 .modal__list--container {
   margin-left: 3rem;
   padding: 2rem;
+  opacity: 0;
 }
 
 .modal__description {
@@ -102,6 +103,10 @@
     'tech security'
     'data API';
   padding: 2rem 1rem;
+  @include respond(break-600) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 #tech {
@@ -163,6 +168,25 @@
     padding: 0.25rem 1rem;
     font-size: 1.8rem;
     box-shadow: 2px 2px 5px #414141;
+    transition: all 0.3s;
+    @include respond(break-600) {
+      display: none;
+    }
+  }
+  &--more-info {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #000;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #ffd848;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    padding: 0.5rem 2rem;
+    font-size: 1.8rem;
+    box-shadow: 5px 5px 10px #414141;
     transition: all 0.3s;
   }
 }

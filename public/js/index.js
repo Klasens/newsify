@@ -5,6 +5,55 @@ import { signUp } from './signUp';
 import { updateSettings } from './updateSettings';
 import { createBookmark } from './bookmark';
 
+// MORE INFO SELECTORS
+const moreInfo = document.querySelector('.more-info');
+const moreInfoHeader = document.querySelectorAll('.modal__list--container');
+
+if (moreInfo)
+  moreInfo.addEventListener('click', function () {
+    for (let i = 0; i < moreInfoHeader.length; i++) {
+      moreInfoHeader[i].classList.add('fadeIn');
+    }
+    moreInfo.classList.add('opacity-0');
+    moreInfo.classList.add('pointer-events-none');
+  });
+
+// ACOUNT SELECTORS
+const languages = document.getElementById('list1');
+const languagesBtn = document.getElementById('list1Btn');
+const countries = document.getElementById('list2');
+const countriesBtn = document.getElementById('list2Btn');
+const dateRange = document.getElementById('list3');
+const dateRangeBtn = document.getElementById('list3Btn');
+
+if (languagesBtn)
+  languagesBtn.addEventListener('click', function () {
+    languages.classList.add('fadeIn');
+    languages.classList.remove('pointer-events-none');
+    countries.classList.add('pointer-events-none');
+    countries.classList.remove('fadeIn');
+    dateRange.classList.add('pointer-events-none');
+    dateRange.classList.remove('fadeIn');
+  });
+if (countriesBtn)
+  countriesBtn.addEventListener('click', function () {
+    countries.classList.add('fadeIn');
+    countries.classList.remove('pointer-events-none');
+    languages.classList.add('pointer-events-none');
+    languages.classList.remove('fadeIn');
+    dateRange.classList.add('pointer-events-none');
+    dateRange.classList.remove('fadeIn');
+  });
+if (dateRangeBtn)
+  dateRangeBtn.addEventListener('click', function () {
+    dateRange.classList.add('fadeIn');
+    dateRange.classList.remove('pointer-events-none');
+    languages.classList.add('pointer-events-none');
+    languages.classList.remove('fadeIn');
+    countries.classList.add('pointer-events-none');
+    countries.classList.remove('fadeIn');
+  });
+
 // TOP HEADLINES SELECTORS
 const generalHeadlines = document.getElementById('general');
 const worldHeadlines = document.getElementById('world');
@@ -60,7 +109,7 @@ if (userDataForm)
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
     console.log(form);
-    updateSettings(form, 'data');
+    updateSettings(form, 'Settings');
   });
 
 if (userPasswordForm)
@@ -155,6 +204,7 @@ const displayArticle = function () {
     `;
   articleContainer.innerHTML = '';
   articleContainer.insertAdjacentHTML('afterbegin', html);
+  articleContainer.scrollIntoView({ block: 'start', behavior: 'smooth' });
   createBookmarkSelector(article);
 };
 

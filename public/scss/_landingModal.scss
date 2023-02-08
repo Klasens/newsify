@@ -1,0 +1,255 @@
+/**========================================================================
+ *                           TOC - LANDING MODAL 
+ *========================================================================**/
+/* modal */
+/* =============================================== */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  background: rgba(35, 35, 35, 1);
+  transition: all 0.5s;
+  z-index: 10;
+}
+
+/* using :target */
+.modal-container:target {
+  display: flex;
+}
+
+.modal-landing {
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70rem;
+  padding: 4rem 2rem;
+  border-radius: 0.8rem;
+  background-color: $color-primary;
+  color: #fff;
+  box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem hsla(235, 72%, 7%, 0.3);
+  position: relative;
+  transition: all 0.5s;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include respond(break-1600) {
+    top: 55%;
+  }
+  @include respond(break-850) {
+    width: 45rem;
+  }
+  @include respond(break-600) {
+    width: 35rem;
+    top: 55%;
+    padding: 1rem 2rem;
+  }
+}
+
+.modal__details {
+  text-align: center;
+
+  margin-bottom: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.4);
+  @include respond(break-600) {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.modal__title {
+  font-size: 4rem;
+  &--h2 {
+    text-decoration: underline;
+    font-weight: 300;
+    font-size: 3.5rem;
+  }
+}
+
+.list-item__link {
+  color: $color-link;
+}
+.modal__list {
+  font-size: 1.7rem;
+}
+
+.modal__description {
+  margin-top: 2rem;
+
+  font-size: 2rem;
+  font-style: italic;
+  @include respond(break-850) {
+    // font-size: 1.4rem;
+  }
+}
+
+.modal__text {
+  padding: 0 4rem;
+  margin-bottom: 4rem;
+
+  font-size: 1.7rem;
+  line-height: 2;
+  @include respond(break-850) {
+    // font-size: 1.4rem;
+  }
+  @include respond(break-600) {
+    padding: 0 1rem;
+  }
+}
+
+.modal__text::before {
+  content: '';
+
+  position: absolute;
+  top: 0%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+
+  width: 18rem;
+  height: 18rem;
+  border: 1px solid hsla(0, 0%, 100%, 0.2);
+  border-radius: 100rem;
+
+  pointer-events: none;
+}
+
+.modal__btn {
+  padding: 1rem 1.6rem;
+  border: 1px solid hsla(0, 0%, 100%, 0.4);
+  border-radius: 100rem;
+
+  color: inherit;
+  background: transparent;
+  font-size: 1.4rem;
+  font-family: inherit;
+  letter-spacing: 0.2rem;
+
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.modal__btn:hover,
+.modal__btn:focus {
+  border-color: hsla(0, 0%, 100%, 0.6);
+  transform: translateY(-0.2rem);
+}
+
+/* links */
+/* =============================================== */
+.link-1 {
+  font-size: 1.8rem;
+
+  color: var(--light);
+  background: var(--background);
+  box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem hsla(236, 50%, 50%, 0.3);
+  border-radius: 100rem;
+  padding: 1.4rem 3.2rem;
+
+  transition: 0.2s;
+}
+
+.link-1:hover,
+.link-1:focus {
+  transform: translateY(-0.2rem);
+  box-shadow: 0 0 4.4rem 0.2rem hsla(236, 50%, 50%, 0.4);
+}
+
+.link-2 {
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid hsla(0, 0%, 100%, 0.4);
+  border-radius: 100rem;
+
+  color: inherit;
+  font-size: 2.2rem;
+
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.2s;
+}
+
+.link-2::before {
+  content: '×';
+
+  transform: translateY(-0.1rem);
+}
+
+.link-2:hover,
+.link-2:focus {
+  border-color: hsla(0, 0%, 100%, 0.6);
+  transform: translateY(-0.2rem);
+}
+
+/* Second Version Link */
+/* =============================================== */
+.second-version-link,
+.second-version-link:link {
+  color: hsl(236, 50%, 50%);
+  padding: 0.8rem 1.6rem 0.8rem 0.2rem;
+  border-bottom: 2px solid hsl(236, 50%, 50%);
+
+  font-size: 1.4rem;
+  font-weight: bold;
+
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+}
+
+.second-version-link::after {
+  content: '\2197';
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  font-size: 0.9em;
+}
+
+.abs-site-link {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  color: hsla(0, 0%, 0%, 0.6);
+  font-size: 1.6rem;
+}
+
+.pointerEvents-none {
+  pointer-events: none;
+
+  & > * {
+    pointer-events: none;
+  }
+}
+
+.showModal {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.redirect {
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.redirect__img {
+  height: 10rem;
+  width: 10rem;
+  margin: 1rem;
+}

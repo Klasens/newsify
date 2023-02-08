@@ -28,6 +28,11 @@ exports.getSearch = (req, res) => {
     title: 'Search',
   });
 };
+exports.getConstruction = (req, res) => {
+  res.status(200).render('construction', {
+    title: 'Construction',
+  });
+};
 
 exports.updateUserData = async (req, res, next) => {
   try {

@@ -9,7 +9,7 @@ router.get('/oneSheet', authController.isLoggedIn, viewsController.getOverview);
 router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
 router.get('/signUp', authController.isLoggedIn, viewsController.getSignUpForm);
 router.get('/me', authController.protect, viewsController.getAccount);
-router.get('/search', authController.isLoggedIn, viewsController.getSearch);
+router.get('/construction', viewsController.getConstruction);
 
 router.post(
   '/submit-user-data',

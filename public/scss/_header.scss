@@ -66,6 +66,9 @@
     display: flex;
     flex-wrap: nowrap;
     text-decoration: none;
+    @include respond(break-600) {
+      display: none;
+    }
     &--left {
       display: flex;
       flex-direction: column;
@@ -158,4 +161,29 @@
   width: 2.25rem;
   height: 2.25rem;
   fill: currentColor;
+}
+
+.header__menu--mobile {
+  display: none;
+  @include respond(break-600) {
+    display: block;
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+}
+
+.header-btn {
+  @include respond(break-600) {
+    display: none;
+  }
+}
+#mobile-hide {
+  @include respond(break-600) {
+    display: none;
+  }
+}
+#mobile-show {
+  @include respond(break-600) {
+    display: flex;
+  }
 }

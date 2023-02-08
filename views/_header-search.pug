@@ -1,4 +1,5 @@
 header.header
+  img(src="img/hamburger.png" alt="Logo" class="header__menu--mobile")
   a(href="/") 
     .logo__container
       img(src="img/newsify.png" alt="Logo" class="header__logo header__logo--main")
@@ -12,7 +13,7 @@ header.header
   if user
   else
     a(href="/signUp") 
-      button.btn.btn__header.btn__header--yellow Sign Up
+      button.header-btn.btn.btn__header.btn__header--yellow Sign Up
   if user
     a(href="/me") 
         .logo__container
