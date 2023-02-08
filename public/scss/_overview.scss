@@ -1,4 +1,5 @@
 .oneSheet__description {
+  position: relative;
   padding: 2rem 0;
   display: flex;
   align-items: center;
@@ -147,6 +148,23 @@
   font-size: 2.5rem;
   box-shadow: 5px 5px 10px #414141;
   transition: all 0.3s;
+  align-self: center;
+
+  &--sample {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: #000;
+    text-transform: uppercase;
+    background-color: #ffd848;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    padding: 0.25rem 1rem;
+    font-size: 1.8rem;
+    box-shadow: 2px 2px 5px #414141;
+    transition: all 0.3s;
+  }
 }
 
 .modal__btn--signUp:hover {

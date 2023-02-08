@@ -5,8 +5,12 @@ block content
     div.modal__details
       h1.modal__title.modal__title--h1 Newsify One Sheet
       p.modal__text Newsify is a news article aggregation app that hooks into the GNews API. Searching keywords returns the total number of matching articles along with the top ten articles from each search. To bookmark articles, input custom titles, and access other features, create an account using the sign up button below.
+      button.btn.btn__header.btn__header--yellow Top Headlines 
       a(href="/signUp") 
         div.modal__btn--signUp Sign Up
+  else
+    a(href="/signUp") 
+      button.btn.btn__header.btn__header--yellow Sign Up
     div.modal__headers--container
       div#tech.modal__list--container
         h3.modal__title.modal__title--h3 Technology Stack

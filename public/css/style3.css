@@ -101,7 +101,7 @@ a {
       height: 6rem;
       margin-right: 1rem; }
     .header__logo--secondary {
-      height: 2.5rem;
+      height: 3rem;
       margin-right: 0.5rem; }
     .header__logo--login {
       height: 4.5rem;
@@ -138,7 +138,7 @@ a {
   font-style: italic; }
 
 .logo__text--bookmarks {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: bold;
   color: #1e1e1e;
   text-transform: uppercase;
@@ -646,6 +646,7 @@ h2 {
   justify-content: center; }
 
 .oneSheet__description {
+  position: relative;
   padding: 2rem 0;
   display: flex;
   align-items: center;
@@ -767,7 +768,22 @@ h2 {
   padding: 0.5rem 2rem;
   font-size: 2.5rem;
   box-shadow: 5px 5px 10px #414141;
-  transition: all 0.3s; }
+  transition: all 0.3s;
+  align-self: center; }
+  .modal__btn--signUp--sample {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: #000;
+    text-transform: uppercase;
+    background-color: #ffd848;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    padding: 0.25rem 1rem;
+    font-size: 1.8rem;
+    box-shadow: 2px 2px 5px #414141;
+    transition: all 0.3s; }
 
 .modal__btn--signUp:hover {
   border: 1px dashed #00ff15;
@@ -975,7 +991,8 @@ h2 {
   height: 6rem;
   width: 6rem;
   border-radius: 50%;
-  margin: 1rem; }
+  margin: 1rem;
+  object-fit: cover; }
 
 .results__img--pre {
   height: 6rem;
@@ -1052,3 +1069,8 @@ h2 {
   border-top: 1px solid #1abc9c;
   height: 1px;
   width: 5rem; }
+
+.display-flex {
+  display: flex;
+  justify-content: left;
+  width: 90%; }
