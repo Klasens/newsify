@@ -12,6 +12,4 @@ window.smartlook ||
     c.src = 'https://web-sdk.smartlook.com/recorder.js';
     h.appendChild(c);
   })(document);
-smartlook('init', '97ea8a52a438536996b7d2d806a21c68054dcd40', {
-  region: 'eu',
-});
+smartlook('init', '5905646f6951e0b774ff7bf16a9a53be25c322b6', { region: 'eu' });
