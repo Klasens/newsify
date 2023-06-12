@@ -1,5 +1,6 @@
 # Newsify 🚀
 https://www.newsify.work/
+
 This is a web application that allows users to search and display news articles using the GNews API. Users can search for any topic or keyword and the app will return a list of relevant news articles along with the title, description, source, and publication date.
 
 ### Features
